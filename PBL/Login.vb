@@ -9,22 +9,18 @@ Public Class Login
             Return
         End If
 
-        Dim usersFile As String = "users.txt"
-        If System.IO.File.Exists(usersFile) Then
-            Dim lines As String() = System.IO.File.ReadAllLines(usersFile)
-            For Each line As String In lines
-                Dim parts As String() = line.Split(":"c)
-                If parts.Length = 2 AndAlso parts(0) = username AndAlso parts(1) = password Then
-                    ' Login successful
-                    Dim mainForm As New Main_Menu()
-                    mainForm.Show()
-                    Me.Hide()
-                    Return
-                End If
-            Next
-        End If
-
-        MessageBox.Show("Invalid username or password.")
+        Try
+            If DatabaseHelper.LoginUser(username, password) Then
+                ' Login successful
+                Dim mainForm As New Main_Menu()
+                mainForm.Show()
+                Me.Hide()
+            Else
+                MessageBox.Show("Invalid username or password.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Database error: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click

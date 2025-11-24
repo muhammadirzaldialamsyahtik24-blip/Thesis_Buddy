@@ -15,25 +15,16 @@ Public Class Register
             Return
         End If
 
-        ' Check if user already exists
-        Dim usersFile As String = "users.txt"
-        If System.IO.File.Exists(usersFile) Then
-            Dim lines As String() = System.IO.File.ReadAllLines(usersFile)
-            For Each line As String In lines
-                If line.StartsWith(username & ":") Then
-                    MessageBox.Show("Username already exists.")
-                    Return
-                End If
-            Next
-        End If
-
-        ' Save user
-        Using writer As New System.IO.StreamWriter(usersFile, True)
-            writer.WriteLine(username & ":" & password)
-        End Using
-
-        MessageBox.Show("Registration successful!")
-        Me.Close()
+        Try
+            If DatabaseHelper.RegisterUser(username, password) Then
+                MessageBox.Show("Registration successful!")
+                Me.Close()
+            Else
+                MessageBox.Show("Username already exists.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Database error: " & ex.Message)
+        End Try
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
