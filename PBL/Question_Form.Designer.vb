@@ -27,6 +27,7 @@ Partial Class Question_Form
         PanelCard = New Panel()
         LabelTitle = New Label()
         FlowLayoutPanelQuestions = New FlowLayoutPanel()
+        PanelNav = New Panel()
         ButtonSubmit = New Button()
         ButtonCancel = New Button()
         PanelLeft.SuspendLayout()
@@ -41,15 +42,16 @@ Partial Class Question_Form
         PanelLeft.Dock = DockStyle.Left
         PanelLeft.Location = New Point(0, 0)
         PanelLeft.Name = "PanelLeft"
+        PanelLeft.Padding = New Padding(20)
         PanelLeft.Size = New Size(360, 520)
         PanelLeft.TabIndex = 0
         ' 
         ' PictureLogo
         ' 
         PictureLogo.Image = My.Resources.Resources.thesisbuddy_logo
-        PictureLogo.Location = New Point(-20, 23)
+        PictureLogo.Location = New Point(20, 20)
         PictureLogo.Name = "PictureLogo"
-        PictureLogo.Size = New Size(405, 473)
+        PictureLogo.Size = New Size(320, 480)
         PictureLogo.SizeMode = PictureBoxSizeMode.Zoom
         PictureLogo.TabIndex = 1
         PictureLogo.TabStop = False
@@ -59,6 +61,7 @@ Partial Class Question_Form
         PanelCard.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(36))
         PanelCard.Controls.Add(LabelTitle)
         PanelCard.Controls.Add(FlowLayoutPanelQuestions)
+        PanelCard.Controls.Add(PanelNav)
         PanelCard.Controls.Add(ButtonSubmit)
         PanelCard.Controls.Add(ButtonCancel)
         PanelCard.Location = New Point(400, 40)
@@ -81,12 +84,21 @@ Partial Class Question_Form
         ' 
         FlowLayoutPanelQuestions.AutoScroll = True
         FlowLayoutPanelQuestions.FlowDirection = FlowDirection.TopDown
+        FlowLayoutPanelQuestions.WrapContents = False
+        FlowLayoutPanelQuestions.Padding = New Padding(8)
         FlowLayoutPanelQuestions.Location = New Point(36, 64)
         FlowLayoutPanelQuestions.Name = "FlowLayoutPanelQuestions"
         FlowLayoutPanelQuestions.Size = New Size(388, 320)
         FlowLayoutPanelQuestions.TabIndex = 4
         ' 
-        ' ButtonSubmit
+        ' PanelNav
+        ' 
+        PanelNav.Location = New Point(36, 392)
+        PanelNav.Name = "PanelNav"
+        PanelNav.Size = New Size(388, 40)
+        PanelNav.TabIndex = 7
+        ' 
+        ' ButtonSubmit (hidden - dynamic nav used)
         ' 
         ButtonSubmit.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(36))
         ButtonSubmit.FlatAppearance.BorderColor = Color.White
@@ -100,8 +112,9 @@ Partial Class Question_Form
         ButtonSubmit.TabIndex = 5
         ButtonSubmit.Text = "Submit"
         ButtonSubmit.UseVisualStyleBackColor = False
+        ButtonSubmit.Visible = False
         ' 
-        ' ButtonCancel
+        ' ButtonCancel (hidden - dynamic nav used)
         ' 
         ButtonCancel.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(36))
         ButtonCancel.FlatAppearance.BorderColor = Color.White
@@ -115,6 +128,7 @@ Partial Class Question_Form
         ButtonCancel.TabIndex = 6
         ButtonCancel.Text = "Cancel"
         ButtonCancel.UseVisualStyleBackColor = False
+        ButtonCancel.Visible = False
         ' 
         ' Question_Form
         ' 
@@ -143,6 +157,7 @@ Partial Class Question_Form
     Friend WithEvents PanelCard As Panel
     Friend WithEvents LabelTitle As Label
     Friend WithEvents FlowLayoutPanelQuestions As FlowLayoutPanel
+    Friend WithEvents PanelNav As Panel
     Friend WithEvents ButtonSubmit As Button
     Friend WithEvents ButtonCancel As Button
 End Class
