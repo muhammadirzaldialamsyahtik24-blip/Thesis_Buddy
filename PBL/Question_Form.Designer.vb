@@ -17,139 +17,132 @@ Partial Class Question_Form
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    ' NOTE: The following procedure is required by the Windows Form Designer
+    ' It can be modified using the Windows Form Designer.  
+    ' Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Panel1 = New Panel()
-        Label1 = New Label()
-        Button1 = New Button()
-        ProgressBar1 = New ProgressBar()
-        CheckBox1 = New CheckBox()
-        CheckBox2 = New CheckBox()
-        CheckBox3 = New CheckBox()
-        CheckBox4 = New CheckBox()
-        Button2 = New Button()
-        Panel1.SuspendLayout()
+        PanelLeft = New Panel()
+        PictureLogo = New PictureBox()
+        PanelCard = New Panel()
+        LabelTitle = New Label()
+        FlowLayoutPanelQuestions = New FlowLayoutPanel()
+        ButtonSubmit = New Button()
+        ButtonCancel = New Button()
+        PanelLeft.SuspendLayout()
+        CType(PictureLogo, ComponentModel.ISupportInitialize).BeginInit()
+        PanelCard.SuspendLayout()
         SuspendLayout()
         ' 
-        ' Panel1
+        ' PanelLeft
         ' 
-        Panel1.Controls.Add(Label1)
-        Panel1.Location = New Point(1, 0)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(800, 108)
-        Panel1.TabIndex = 0
+        PanelLeft.BackColor = Color.FromArgb(CByte(12), CByte(18), CByte(25))
+        PanelLeft.Controls.Add(PictureLogo)
+        PanelLeft.Dock = DockStyle.Left
+        PanelLeft.Location = New Point(0, 0)
+        PanelLeft.Name = "PanelLeft"
+        PanelLeft.Size = New Size(360, 520)
+        PanelLeft.TabIndex = 0
         ' 
-        ' Label1
+        ' PictureLogo
         ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(263, 24)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(225, 62)
-        Label1.TabIndex = 0
-        Label1.Text = "Perntanyaan 1 dari ..." & vbCrLf & "     Pertanyaan ...." & vbCrLf
+        PictureLogo.Image = My.Resources.Resources.thesisbuddy_logo
+        PictureLogo.Location = New Point(-20, 23)
+        PictureLogo.Name = "PictureLogo"
+        PictureLogo.Size = New Size(405, 473)
+        PictureLogo.SizeMode = PictureBoxSizeMode.Zoom
+        PictureLogo.TabIndex = 1
+        PictureLogo.TabStop = False
         ' 
-        ' Button1
+        ' PanelCard
         ' 
-        Button1.Location = New Point(628, 369)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(160, 53)
-        Button1.TabIndex = 1
-        Button1.Text = "Next"
-        Button1.UseVisualStyleBackColor = True
+        PanelCard.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(36))
+        PanelCard.Controls.Add(LabelTitle)
+        PanelCard.Controls.Add(FlowLayoutPanelQuestions)
+        PanelCard.Controls.Add(ButtonSubmit)
+        PanelCard.Controls.Add(ButtonCancel)
+        PanelCard.Location = New Point(400, 40)
+        PanelCard.Name = "PanelCard"
+        PanelCard.Size = New Size(460, 440)
+        PanelCard.TabIndex = 2
         ' 
-        ' ProgressBar1
+        ' LabelTitle
         ' 
-        ProgressBar1.Location = New Point(26, 393)
-        ProgressBar1.Name = "ProgressBar1"
-        ProgressBar1.Size = New Size(309, 29)
-        ProgressBar1.TabIndex = 2
+        LabelTitle.AutoSize = True
+        LabelTitle.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold)
+        LabelTitle.ForeColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
+        LabelTitle.Location = New Point(36, 18)
+        LabelTitle.Name = "LabelTitle"
+        LabelTitle.Size = New Size(296, 32)
+        LabelTitle.TabIndex = 3
+        LabelTitle.Text = "Sistem Pakar ThesisBuddy"
         ' 
-        ' CheckBox1
+        ' FlowLayoutPanelQuestions
         ' 
-        CheckBox1.AutoSize = True
-        CheckBox1.Font = New Font("Segoe UI", 12F)
-        CheckBox1.Location = New Point(151, 135)
-        CheckBox1.Name = "CheckBox1"
-        CheckBox1.Size = New Size(126, 32)
-        CheckBox1.TabIndex = 3
-        CheckBox1.Text = "Jawaban A" & vbCrLf
-        CheckBox1.UseVisualStyleBackColor = True
+        FlowLayoutPanelQuestions.AutoScroll = True
+        FlowLayoutPanelQuestions.FlowDirection = FlowDirection.TopDown
+        FlowLayoutPanelQuestions.Location = New Point(36, 64)
+        FlowLayoutPanelQuestions.Name = "FlowLayoutPanelQuestions"
+        FlowLayoutPanelQuestions.Size = New Size(388, 320)
+        FlowLayoutPanelQuestions.TabIndex = 4
         ' 
-        ' CheckBox2
+        ' ButtonSubmit
         ' 
-        CheckBox2.AutoSize = True
-        CheckBox2.Font = New Font("Segoe UI", 12F)
-        CheckBox2.Location = New Point(151, 180)
-        CheckBox2.Name = "CheckBox2"
-        CheckBox2.Size = New Size(124, 32)
-        CheckBox2.TabIndex = 4
-        CheckBox2.Text = "Jawaban B"
-        CheckBox2.UseVisualStyleBackColor = True
+        ButtonSubmit.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(36))
+        ButtonSubmit.FlatAppearance.BorderColor = Color.White
+        ButtonSubmit.FlatAppearance.BorderSize = 2
+        ButtonSubmit.FlatStyle = FlatStyle.Flat
+        ButtonSubmit.Font = New Font("Segoe UI Semibold", 11.0F, FontStyle.Bold)
+        ButtonSubmit.ForeColor = Color.White
+        ButtonSubmit.Location = New Point(304, 392)
+        ButtonSubmit.Name = "ButtonSubmit"
+        ButtonSubmit.Size = New Size(120, 40)
+        ButtonSubmit.TabIndex = 5
+        ButtonSubmit.Text = "Submit"
+        ButtonSubmit.UseVisualStyleBackColor = False
         ' 
-        ' CheckBox3
+        ' ButtonCancel
         ' 
-        CheckBox3.AutoSize = True
-        CheckBox3.Font = New Font("Segoe UI", 12F)
-        CheckBox3.Location = New Point(151, 223)
-        CheckBox3.Name = "CheckBox3"
-        CheckBox3.Size = New Size(125, 32)
-        CheckBox3.TabIndex = 5
-        CheckBox3.Text = "Jawaban C"
-        CheckBox3.UseVisualStyleBackColor = True
-        ' 
-        ' CheckBox4
-        ' 
-        CheckBox4.AutoSize = True
-        CheckBox4.Font = New Font("Segoe UI", 12F)
-        CheckBox4.Location = New Point(151, 268)
-        CheckBox4.Name = "CheckBox4"
-        CheckBox4.Size = New Size(127, 32)
-        CheckBox4.TabIndex = 6
-        CheckBox4.Text = "Jawaban D"
-        CheckBox4.UseVisualStyleBackColor = True
-        ' 
-        ' Button2
-        ' 
-        Button2.Location = New Point(462, 369)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(160, 53)
-        Button2.TabIndex = 7
-        Button2.Text = "Back"
-        Button2.UseVisualStyleBackColor = True
+        ButtonCancel.BackColor = Color.FromArgb(CByte(24), CByte(30), CByte(36))
+        ButtonCancel.FlatAppearance.BorderColor = Color.White
+        ButtonCancel.FlatAppearance.BorderSize = 2
+        ButtonCancel.FlatStyle = FlatStyle.Flat
+        ButtonCancel.Font = New Font("Segoe UI Semibold", 9.0F, FontStyle.Bold)
+        ButtonCancel.ForeColor = Color.White
+        ButtonCancel.Location = New Point(36, 392)
+        ButtonCancel.Name = "ButtonCancel"
+        ButtonCancel.Size = New Size(140, 40)
+        ButtonCancel.TabIndex = 6
+        ButtonCancel.Text = "Cancel"
+        ButtonCancel.UseVisualStyleBackColor = False
         ' 
         ' Question_Form
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7.0F, 17.0F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.Cornsilk
-        ClientSize = New Size(800, 450)
-        Controls.Add(Button2)
-        Controls.Add(CheckBox4)
-        Controls.Add(CheckBox3)
-        Controls.Add(CheckBox2)
-        Controls.Add(CheckBox1)
-        Controls.Add(ProgressBar1)
-        Controls.Add(Button1)
-        Controls.Add(Panel1)
+        BackColor = Color.FromArgb(CByte(18), CByte(24), CByte(31))
+        ClientSize = New Size(900, 520)
+        Controls.Add(PanelCard)
+        Controls.Add(PanelLeft)
+        Font = New Font("Segoe UI", 10.0F)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
         Name = "Question_Form"
-        Text = "Question Form"
-        Panel1.ResumeLayout(False)
-        Panel1.PerformLayout()
+        StartPosition = FormStartPosition.CenterScreen
+        Text = "Question Form - ThesisBuddy"
+        PanelLeft.ResumeLayout(False)
+        CType(PictureLogo, ComponentModel.ISupportInitialize).EndInit()
+        PanelCard.ResumeLayout(False)
+        PanelCard.PerformLayout()
         ResumeLayout(False)
-        PerformLayout()
+
     End Sub
 
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
-    Friend WithEvents ProgressBar1 As ProgressBar
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents Button2 As Button
+    Friend WithEvents PanelLeft As Panel
+    Friend WithEvents PictureLogo As PictureBox
+    Friend WithEvents PanelCard As Panel
+    Friend WithEvents LabelTitle As Label
+    Friend WithEvents FlowLayoutPanelQuestions As FlowLayoutPanel
+    Friend WithEvents ButtonSubmit As Button
+    Friend WithEvents ButtonCancel As Button
 End Class
