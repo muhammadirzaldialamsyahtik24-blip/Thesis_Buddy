@@ -22,109 +22,191 @@ Partial Class Register
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.SuspendLayout()
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(50, 50)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(67, 20)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Username:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(50, 100)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 20)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Password:"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(50, 150)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(110, 20)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Confirm Password:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(170, 50)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(200, 27)
-        Me.TextBox1.TabIndex = 3
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(170, 100)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.PasswordChar = "*"c
-        Me.TextBox2.Size = New System.Drawing.Size(200, 27)
-        Me.TextBox2.TabIndex = 4
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(170, 150)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.PasswordChar = "*"c
-        Me.TextBox3.Size = New System.Drawing.Size(200, 27)
-        Me.TextBox3.TabIndex = 5
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(120, 200)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 29)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Register"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(220, 200)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 29)
-        Me.Button2.TabIndex = 7
-        Me.Button2.Text = "Back"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Register
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0F, 20.0F)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(450, 250)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Name = "Register"
-        Me.Text = "Register"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        PanelMain = New Panel()
+        LabelTitle = New Label()
+        LabelSubtitle = New Label()
+        LabelUsername = New Label()
+        TextBoxUsername = New TextBox()
+        LabelPassword = New Label()
+        TextBoxPassword = New TextBox()
+        LabelConfirm = New Label()
+        TextBoxConfirm = New TextBox()
+        ButtonRegister = New Button()
+        ButtonBack = New Button()
+        PanelMain.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' PanelMain
+        ' 
+        PanelMain.Anchor = AnchorStyles.None
+        PanelMain.BackColor = Color.FromArgb(CByte(12), CByte(44), CByte(93))
+        PanelMain.Controls.Add(LabelTitle)
+        PanelMain.Controls.Add(LabelSubtitle)
+        PanelMain.Controls.Add(LabelUsername)
+        PanelMain.Controls.Add(TextBoxUsername)
+        PanelMain.Controls.Add(LabelPassword)
+        PanelMain.Controls.Add(TextBoxPassword)
+        PanelMain.Controls.Add(LabelConfirm)
+        PanelMain.Controls.Add(TextBoxConfirm)
+        PanelMain.Controls.Add(ButtonRegister)
+        PanelMain.Controls.Add(ButtonBack)
+        PanelMain.Location = New Point(140, 45)
+        PanelMain.Margin = New Padding(3, 2, 3, 2)
+        PanelMain.Name = "PanelMain"
+        PanelMain.Size = New Size(420, 248)
+        PanelMain.TabIndex = 0
+        ' 
+        ' LabelTitle
+        ' 
+        LabelTitle.AutoSize = True
+        LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
+        LabelTitle.ForeColor = Color.White
+        LabelTitle.Location = New Point(52, 6)
+        LabelTitle.Name = "LabelTitle"
+        LabelTitle.Size = New Size(213, 32)
+        LabelTitle.TabIndex = 1
+        LabelTitle.Text = "Create an account"
+        ' 
+        ' LabelSubtitle
+        ' 
+        LabelSubtitle.AutoSize = True
+        LabelSubtitle.Font = New Font("Segoe UI", 9F)
+        LabelSubtitle.ForeColor = Color.LightGray
+        LabelSubtitle.Location = New Point(52, 47)
+        LabelSubtitle.Name = "LabelSubtitle"
+        LabelSubtitle.Size = New Size(119, 15)
+        LabelSubtitle.TabIndex = 2
+        LabelSubtitle.Text = "Isi Yang bener Bujank"
+        ' 
+        ' LabelUsername
+        ' 
+        LabelUsername.AutoSize = True
+        LabelUsername.Font = New Font("Segoe UI", 9F)
+        LabelUsername.ForeColor = Color.LightGray
+        LabelUsername.Location = New Point(52, 74)
+        LabelUsername.Name = "LabelUsername"
+        LabelUsername.Size = New Size(60, 15)
+        LabelUsername.TabIndex = 3
+        LabelUsername.Text = "Username"
+        ' 
+        ' TextBoxUsername
+        ' 
+        TextBoxUsername.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxUsername.BorderStyle = BorderStyle.FixedSingle
+        TextBoxUsername.Font = New Font("Segoe UI", 10F)
+        TextBoxUsername.ForeColor = Color.White
+        TextBoxUsername.Location = New Point(52, 92)
+        TextBoxUsername.Margin = New Padding(3, 2, 3, 2)
+        TextBoxUsername.Name = "TextBoxUsername"
+        TextBoxUsername.Size = New Size(315, 25)
+        TextBoxUsername.TabIndex = 4
+        ' 
+        ' LabelPassword
+        ' 
+        LabelPassword.AutoSize = True
+        LabelPassword.Font = New Font("Segoe UI", 9F)
+        LabelPassword.ForeColor = Color.LightGray
+        LabelPassword.Location = New Point(52, 122)
+        LabelPassword.Name = "LabelPassword"
+        LabelPassword.Size = New Size(57, 15)
+        LabelPassword.TabIndex = 5
+        LabelPassword.Text = "Password"
+        ' 
+        ' TextBoxPassword
+        ' 
+        TextBoxPassword.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxPassword.BorderStyle = BorderStyle.FixedSingle
+        TextBoxPassword.Font = New Font("Segoe UI", 10F)
+        TextBoxPassword.ForeColor = Color.White
+        TextBoxPassword.Location = New Point(52, 141)
+        TextBoxPassword.Margin = New Padding(3, 2, 3, 2)
+        TextBoxPassword.Name = "TextBoxPassword"
+        TextBoxPassword.PasswordChar = "?"c
+        TextBoxPassword.Size = New Size(315, 25)
+        TextBoxPassword.TabIndex = 6
+        ' 
+        ' LabelConfirm
+        ' 
+        LabelConfirm.AutoSize = True
+        LabelConfirm.Font = New Font("Segoe UI", 9F)
+        LabelConfirm.ForeColor = Color.LightGray
+        LabelConfirm.Location = New Point(52, 171)
+        LabelConfirm.Name = "LabelConfirm"
+        LabelConfirm.Size = New Size(104, 15)
+        LabelConfirm.TabIndex = 7
+        LabelConfirm.Text = "Confirm Password"
+        ' 
+        ' TextBoxConfirm
+        ' 
+        TextBoxConfirm.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxConfirm.BorderStyle = BorderStyle.FixedSingle
+        TextBoxConfirm.Font = New Font("Segoe UI", 10F)
+        TextBoxConfirm.ForeColor = Color.White
+        TextBoxConfirm.Location = New Point(52, 190)
+        TextBoxConfirm.Margin = New Padding(3, 2, 3, 2)
+        TextBoxConfirm.Name = "TextBoxConfirm"
+        TextBoxConfirm.PasswordChar = "?"c
+        TextBoxConfirm.Size = New Size(315, 25)
+        TextBoxConfirm.TabIndex = 8
+        ' 
+        ' ButtonRegister
+        ' 
+        ButtonRegister.BackColor = Color.FromArgb(CByte(93), CByte(64), CByte(199))
+        ButtonRegister.FlatAppearance.BorderColor = Color.White
+        ButtonRegister.FlatAppearance.BorderSize = 2
+        ButtonRegister.FlatStyle = FlatStyle.Flat
+        ButtonRegister.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        ButtonRegister.ForeColor = Color.White
+        ButtonRegister.Location = New Point(280, 220)
+        ButtonRegister.Margin = New Padding(3, 2, 3, 2)
+        ButtonRegister.Name = "ButtonRegister"
+        ButtonRegister.Size = New Size(88, 26)
+        ButtonRegister.TabIndex = 9
+        ButtonRegister.Text = "Register"
+        ButtonRegister.UseVisualStyleBackColor = False
+        ' 
+        ' ButtonBack
+        ' 
+        ButtonBack.BackColor = Color.Transparent
+        ButtonBack.FlatStyle = FlatStyle.Flat
+        ButtonBack.Font = New Font("Segoe UI", 9F)
+        ButtonBack.ForeColor = Color.LightGray
+        ButtonBack.Location = New Point(52, 220)
+        ButtonBack.Margin = New Padding(3, 2, 3, 2)
+        ButtonBack.Name = "ButtonBack"
+        ButtonBack.Size = New Size(66, 26)
+        ButtonBack.TabIndex = 10
+        ButtonBack.Text = "Back"
+        ButtonBack.UseVisualStyleBackColor = False
+        ' 
+        ' Register
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(10), CByte(25), CByte(56))
+        ClientSize = New Size(700, 338)
+        Controls.Add(PanelMain)
+        Font = New Font("Segoe UI", 9F)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        Margin = New Padding(3, 2, 3, 2)
+        MaximizeBox = False
+        Name = "Register"
+        Text = "Register"
+        PanelMain.ResumeLayout(False)
+        PanelMain.PerformLayout()
+        ResumeLayout(False)
+
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents PanelMain As Panel
+    Friend WithEvents LabelTitle As Label
+    Friend WithEvents LabelSubtitle As Label
+    Friend WithEvents LabelUsername As Label
+    Friend WithEvents TextBoxUsername As TextBox
+    Friend WithEvents LabelPassword As Label
+    Friend WithEvents TextBoxPassword As TextBox
+    Friend WithEvents LabelConfirm As Label
+    Friend WithEvents TextBoxConfirm As TextBox
+    Friend WithEvents ButtonRegister As Button
+    Friend WithEvents ButtonBack As Button
 End Class

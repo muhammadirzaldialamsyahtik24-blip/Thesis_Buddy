@@ -1,16 +1,21 @@
 Public Class Register
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim username As String = TextBox1.Text.Trim()
-        Dim password As String = TextBox2.Text
-        Dim confirmPassword As String = TextBox3.Text
+    Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        PanelMain.Left = (Me.ClientSize.Width - PanelMain.Width) \ 2
+        PanelMain.Top = (Me.ClientSize.Height - PanelMain.Height) \ 2
+    End Sub
+
+    Private Sub ButtonRegister_Click(sender As Object, e As EventArgs) Handles ButtonRegister.Click
+        Dim username As String = TextBoxUsername.Text.Trim()
+        Dim password As String = TextBoxPassword.Text
+        Dim confirm As String = TextBoxConfirm.Text
 
         If String.IsNullOrEmpty(username) Or String.IsNullOrEmpty(password) Then
             MessageBox.Show("Please fill in all fields.")
             Return
         End If
 
-        If password <> confirmPassword Then
+        If password <> confirm Then
             MessageBox.Show("Passwords do not match.")
             Return
         End If
@@ -27,7 +32,11 @@ Public Class Register
         End Try
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub ButtonBack_Click(sender As Object, e As EventArgs) Handles ButtonBack.Click
         Me.Close()
+    End Sub
+
+    Private Sub LabelSubtitle_Click(sender As Object, e As EventArgs) Handles LabelSubtitle.Click
+
     End Sub
 End Class

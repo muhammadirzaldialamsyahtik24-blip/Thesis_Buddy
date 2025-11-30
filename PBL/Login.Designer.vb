@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class Login
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,110 +20,260 @@ Partial Class Login
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.SuspendLayout()
-        '
-        'Login
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0F, 20.0F)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.LightBlue
-        Me.ClientSize = New System.Drawing.Size(400, 250)
-        Me.Font = New System.Drawing.Font("Arial", 10.0!)
-        Me.Name = "Login"
-        Me.Text = "Login - Thesis Buddy"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.Label1.Location = New System.Drawing.Point(50, 50)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(90, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Username:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.Label2.Location = New System.Drawing.Point(50, 100)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(87, 19)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Password:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Arial", 10.0!)
-        Me.TextBox1.Location = New System.Drawing.Point(150, 50)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(200, 27)
-        Me.TextBox1.TabIndex = 2
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Arial", 10.0!)
-        Me.TextBox2.Location = New System.Drawing.Point(150, 100)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.PasswordChar = "*"c
-        Me.TextBox2.Size = New System.Drawing.Size(200, 27)
-        Me.TextBox2.TabIndex = 3
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(100, 150)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 29)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Login"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.Green
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(200, 150)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 29)
-        Me.Button2.TabIndex = 5
-        Me.Button2.Text = "Register"
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Login
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0F, 20.0F)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(400, 250)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Name = "Login"
-        Me.Text = "Login - Thesis Buddy"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        PanelTitle = New Panel()
+        LabelAppTitle = New Label()
+        ButtonMinimize = New Button()
+        ButtonClose = New Button()
+        PanelMain = New Panel()
+        LabelTitle = New Label()
+        LabelSubtitle = New Label()
+        LabelUsername = New Label()
+        TextBoxUsername = New TextBox()
+        LabelPassword = New Label()
+        TextBoxPassword = New TextBox()
+        CheckBoxShow = New CheckBox()
+        LinkForgot = New LinkLabel()
+        ButtonLogin = New Button()
+        ButtonRegister = New Button()
+        PanelTitle.SuspendLayout()
+        PanelMain.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' PanelTitle
+        ' 
+        PanelTitle.BackColor = Color.FromArgb(CByte(6), CByte(30), CByte(70))
+        PanelTitle.Controls.Add(LabelAppTitle)
+        PanelTitle.Controls.Add(ButtonMinimize)
+        PanelTitle.Controls.Add(ButtonClose)
+        PanelTitle.Dock = DockStyle.Top
+        PanelTitle.Location = New Point(0, 0)
+        PanelTitle.Margin = New Padding(3, 2, 3, 2)
+        PanelTitle.Name = "PanelTitle"
+        PanelTitle.Size = New Size(718, 35)
+        PanelTitle.TabIndex = 0
+        ' 
+        ' LabelAppTitle
+        ' 
+        LabelAppTitle.AutoSize = True
+        LabelAppTitle.Font = New Font("Segoe UI Semibold", 11F, FontStyle.Bold)
+        LabelAppTitle.ForeColor = Color.White
+        LabelAppTitle.Location = New Point(12, 9)
+        LabelAppTitle.Name = "LabelAppTitle"
+        LabelAppTitle.Size = New Size(98, 20)
+        LabelAppTitle.TabIndex = 1
+        LabelAppTitle.Text = "Thesis Buddy"
+        ' 
+        ' ButtonMinimize
+        ' 
+        ButtonMinimize.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        ButtonMinimize.BackColor = Color.Transparent
+        ButtonMinimize.FlatAppearance.BorderSize = 0
+        ButtonMinimize.FlatStyle = FlatStyle.Flat
+        ButtonMinimize.ForeColor = Color.White
+        ButtonMinimize.Location = New Point(1191, 3)
+        ButtonMinimize.Margin = New Padding(3, 2, 3, 2)
+        ButtonMinimize.Name = "ButtonMinimize"
+        ButtonMinimize.Size = New Size(26, 21)
+        ButtonMinimize.TabIndex = 2
+        ButtonMinimize.Text = "—"
+        ButtonMinimize.UseVisualStyleBackColor = True
+        ' 
+        ' ButtonClose
+        ' 
+        ButtonClose.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+        ButtonClose.BackColor = Color.Transparent
+        ButtonClose.FlatAppearance.BorderSize = 0
+        ButtonClose.FlatStyle = FlatStyle.Flat
+        ButtonClose.ForeColor = Color.White
+        ButtonClose.Location = New Point(1220, 3)
+        ButtonClose.Margin = New Padding(3, 2, 3, 2)
+        ButtonClose.Name = "ButtonClose"
+        ButtonClose.Size = New Size(26, 21)
+        ButtonClose.TabIndex = 3
+        ButtonClose.Text = "X"
+        ButtonClose.UseVisualStyleBackColor = True
+        ' 
+        ' PanelMain
+        ' 
+        PanelMain.Anchor = AnchorStyles.None
+        PanelMain.BackColor = Color.FromArgb(CByte(12), CByte(44), CByte(93))
+        PanelMain.Controls.Add(LabelTitle)
+        PanelMain.Controls.Add(LabelSubtitle)
+        PanelMain.Controls.Add(LabelUsername)
+        PanelMain.Controls.Add(TextBoxUsername)
+        PanelMain.Controls.Add(LabelPassword)
+        PanelMain.Controls.Add(TextBoxPassword)
+        PanelMain.Controls.Add(CheckBoxShow)
+        PanelMain.Controls.Add(LinkForgot)
+        PanelMain.Controls.Add(ButtonLogin)
+        PanelMain.Controls.Add(ButtonRegister)
+        PanelMain.Location = New Point(149, 52)
+        PanelMain.Margin = New Padding(3, 2, 3, 2)
+        PanelMain.Name = "PanelMain"
+        PanelMain.Size = New Size(420, 248)
+        PanelMain.TabIndex = 1
+        ' 
+        ' LabelTitle
+        ' 
+        LabelTitle.AutoSize = True
+        LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
+        LabelTitle.ForeColor = Color.White
+        LabelTitle.Location = New Point(52, 22)
+        LabelTitle.Name = "LabelTitle"
+        LabelTitle.Size = New Size(206, 32)
+        LabelTitle.TabIndex = 1
+        LabelTitle.Text = "LOGIN dulu Dong" & vbCrLf
+        ' 
+        ' LabelSubtitle
+        ' 
+        LabelSubtitle.AutoSize = True
+        LabelSubtitle.Font = New Font("Segoe UI", 9F)
+        LabelSubtitle.ForeColor = Color.LightGray
+        LabelSubtitle.Location = New Point(52, 54)
+        LabelSubtitle.Name = "LabelSubtitle"
+        LabelSubtitle.Size = New Size(175, 15)
+        LabelSubtitle.TabIndex = 2
+        LabelSubtitle.Text = "Hayo Jangan Lupa ID SAMA PW"
+        ' 
+        ' LabelUsername
+        ' 
+        LabelUsername.AutoSize = True
+        LabelUsername.Font = New Font("Segoe UI", 9F)
+        LabelUsername.ForeColor = Color.LightGray
+        LabelUsername.Location = New Point(52, 82)
+        LabelUsername.Name = "LabelUsername"
+        LabelUsername.Size = New Size(60, 15)
+        LabelUsername.TabIndex = 3
+        LabelUsername.Text = "Username"
+        ' 
+        ' TextBoxUsername
+        ' 
+        TextBoxUsername.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxUsername.BorderStyle = BorderStyle.FixedSingle
+        TextBoxUsername.Font = New Font("Segoe UI", 10F)
+        TextBoxUsername.ForeColor = Color.White
+        TextBoxUsername.Location = New Point(52, 101)
+        TextBoxUsername.Margin = New Padding(3, 2, 3, 2)
+        TextBoxUsername.Name = "TextBoxUsername"
+        TextBoxUsername.Size = New Size(315, 25)
+        TextBoxUsername.TabIndex = 4
+        ' 
+        ' LabelPassword
+        ' 
+        LabelPassword.AutoSize = True
+        LabelPassword.Font = New Font("Segoe UI", 9F)
+        LabelPassword.ForeColor = Color.LightGray
+        LabelPassword.Location = New Point(52, 137)
+        LabelPassword.Name = "LabelPassword"
+        LabelPassword.Size = New Size(57, 15)
+        LabelPassword.TabIndex = 5
+        LabelPassword.Text = "Password"
+        ' 
+        ' TextBoxPassword
+        ' 
+        TextBoxPassword.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxPassword.BorderStyle = BorderStyle.FixedSingle
+        TextBoxPassword.Font = New Font("Segoe UI", 10F)
+        TextBoxPassword.ForeColor = Color.White
+        TextBoxPassword.Location = New Point(52, 156)
+        TextBoxPassword.Margin = New Padding(3, 2, 3, 2)
+        TextBoxPassword.Name = "TextBoxPassword"
+        TextBoxPassword.PasswordChar = "?"c
+        TextBoxPassword.Size = New Size(294, 25)
+        TextBoxPassword.TabIndex = 6
+        ' 
+        ' CheckBoxShow
+        ' 
+        CheckBoxShow.AutoSize = True
+        CheckBoxShow.ForeColor = Color.LightGray
+        CheckBoxShow.Location = New Point(352, 161)
+        CheckBoxShow.Margin = New Padding(3, 2, 3, 2)
+        CheckBoxShow.Name = "CheckBoxShow"
+        CheckBoxShow.Size = New Size(15, 14)
+        CheckBoxShow.TabIndex = 7
+        CheckBoxShow.UseVisualStyleBackColor = True
+        ' 
+        ' LinkForgot
+        ' 
+        LinkForgot.ActiveLinkColor = Color.LightGray
+        LinkForgot.AutoSize = True
+        LinkForgot.LinkColor = Color.LightGray
+        LinkForgot.Location = New Point(52, 186)
+        LinkForgot.Name = "LinkForgot"
+        LinkForgot.Size = New Size(100, 15)
+        LinkForgot.TabIndex = 8
+        LinkForgot.TabStop = True
+        LinkForgot.Text = "Forgot password?"
+        ' 
+        ' ButtonLogin
+        ' 
+        ButtonLogin.BackColor = Color.FromArgb(CByte(93), CByte(64), CByte(199))
+        ButtonLogin.FlatAppearance.BorderColor = Color.White
+        ButtonLogin.FlatAppearance.BorderSize = 2
+        ButtonLogin.FlatStyle = FlatStyle.Flat
+        ButtonLogin.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        ButtonLogin.ForeColor = Color.White
+        ButtonLogin.Location = New Point(324, 212)
+        ButtonLogin.Margin = New Padding(3, 2, 3, 2)
+        ButtonLogin.Name = "ButtonLogin"
+        ButtonLogin.Size = New Size(88, 26)
+        ButtonLogin.TabIndex = 9
+        ButtonLogin.Text = "Login"
+        ButtonLogin.UseVisualStyleBackColor = False
+        ' 
+        ' ButtonRegister
+        ' 
+        ButtonRegister.BackColor = Color.FromArgb(CByte(60), CByte(60), CByte(70))
+        ButtonRegister.FlatAppearance.BorderColor = Color.White
+        ButtonRegister.FlatStyle = FlatStyle.Flat
+        ButtonRegister.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        ButtonRegister.ForeColor = Color.White
+        ButtonRegister.Location = New Point(230, 212)
+        ButtonRegister.Margin = New Padding(3, 2, 3, 2)
+        ButtonRegister.Name = "ButtonRegister"
+        ButtonRegister.Size = New Size(88, 26)
+        ButtonRegister.TabIndex = 10
+        ButtonRegister.Text = "Register"
+        ButtonRegister.UseVisualStyleBackColor = False
+        ' 
+        ' Login
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.FromArgb(CByte(10), CByte(25), CByte(56))
+        ClientSize = New Size(718, 360)
+        Controls.Add(PanelMain)
+        Controls.Add(PanelTitle)
+        Font = New Font("Segoe UI", 9F)
+        FormBorderStyle = FormBorderStyle.None
+        Margin = New Padding(3, 2, 3, 2)
+        MaximizeBox = False
+        Name = "Login"
+        StartPosition = FormStartPosition.CenterScreen
+        Text = "Login"
+        PanelTitle.ResumeLayout(False)
+        PanelTitle.PerformLayout()
+        PanelMain.ResumeLayout(False)
+        PanelMain.PerformLayout()
+        ResumeLayout(False)
+
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents PanelTitle As Panel
+    Friend WithEvents LabelAppTitle As Label
+    Friend WithEvents ButtonMinimize As Button
+    Friend WithEvents ButtonClose As Button
+    Friend WithEvents PanelMain As Panel
+    Friend WithEvents LabelSubtitle As Label
+    Friend WithEvents LabelTitle As Label
+    Friend WithEvents LinkForgot As LinkLabel
+    Friend WithEvents CheckBoxShow As CheckBox
+    Friend WithEvents ButtonLogin As Button
+    Friend WithEvents ButtonRegister As Button
+    Friend WithEvents TextBoxPassword As TextBox
+    Friend WithEvents TextBoxUsername As TextBox
+    Friend WithEvents LabelPassword As Label
+    Friend WithEvents LabelUsername As Label
 End Class
