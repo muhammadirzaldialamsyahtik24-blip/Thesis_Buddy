@@ -51,17 +51,18 @@ Partial Class Login
         PanelTitle.Location = New Point(0, 0)
         PanelTitle.Margin = New Padding(3, 2, 3, 2)
         PanelTitle.Name = "PanelTitle"
-        PanelTitle.Size = New Size(718, 35)
+        PanelTitle.Size = New Size(540, 35)
         PanelTitle.TabIndex = 0
         ' 
         ' LabelAppTitle
         ' 
         LabelAppTitle.AutoSize = True
-        LabelAppTitle.Font = New Font("Segoe UI Semibold", 11F, FontStyle.Bold)
+        LabelAppTitle.FlatStyle = FlatStyle.Popup
+        LabelAppTitle.Font = New Font("Orbitron", 11.2499981F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         LabelAppTitle.ForeColor = Color.White
-        LabelAppTitle.Location = New Point(12, 9)
+        LabelAppTitle.Location = New Point(7, 8)
         LabelAppTitle.Name = "LabelAppTitle"
-        LabelAppTitle.Size = New Size(98, 20)
+        LabelAppTitle.Size = New Size(119, 18)
         LabelAppTitle.TabIndex = 1
         LabelAppTitle.Text = "Thesis Buddy"
         ' 
@@ -72,7 +73,7 @@ Partial Class Login
         ButtonMinimize.FlatAppearance.BorderSize = 0
         ButtonMinimize.FlatStyle = FlatStyle.Flat
         ButtonMinimize.ForeColor = Color.White
-        ButtonMinimize.Location = New Point(1191, 3)
+        ButtonMinimize.Location = New Point(1013, 3)
         ButtonMinimize.Margin = New Padding(3, 2, 3, 2)
         ButtonMinimize.Name = "ButtonMinimize"
         ButtonMinimize.Size = New Size(26, 21)
@@ -87,7 +88,7 @@ Partial Class Login
         ButtonClose.FlatAppearance.BorderSize = 0
         ButtonClose.FlatStyle = FlatStyle.Flat
         ButtonClose.ForeColor = Color.White
-        ButtonClose.Location = New Point(1220, 3)
+        ButtonClose.Location = New Point(1042, 3)
         ButtonClose.Margin = New Padding(3, 2, 3, 2)
         ButtonClose.Name = "ButtonClose"
         ButtonClose.Size = New Size(26, 21)
@@ -109,52 +110,53 @@ Partial Class Login
         PanelMain.Controls.Add(LinkForgot)
         PanelMain.Controls.Add(ButtonLogin)
         PanelMain.Controls.Add(ButtonRegister)
-        PanelMain.Location = New Point(149, 52)
+        PanelMain.Location = New Point(29, 72)
         PanelMain.Margin = New Padding(3, 2, 3, 2)
         PanelMain.Name = "PanelMain"
-        PanelMain.Size = New Size(420, 248)
+        PanelMain.Size = New Size(471, 248)
         PanelMain.TabIndex = 1
         ' 
         ' LabelTitle
         ' 
         LabelTitle.AutoSize = True
-        LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
+        LabelTitle.Font = New Font("Segoe UI Semibold", 18.0F, FontStyle.Bold)
         LabelTitle.ForeColor = Color.White
         LabelTitle.Location = New Point(52, 22)
         LabelTitle.Name = "LabelTitle"
-        LabelTitle.Size = New Size(206, 32)
+        LabelTitle.Size = New Size(220, 32)
         LabelTitle.TabIndex = 1
-        LabelTitle.Text = "LOGIN dulu Dong" & vbCrLf
+        LabelTitle.Text = "Here you can login"
         ' 
         ' LabelSubtitle
         ' 
         LabelSubtitle.AutoSize = True
-        LabelSubtitle.Font = New Font("Segoe UI", 9F)
+        LabelSubtitle.Font = New Font("Segoe UI", 9.0F)
         LabelSubtitle.ForeColor = Color.LightGray
         LabelSubtitle.Location = New Point(52, 54)
         LabelSubtitle.Name = "LabelSubtitle"
-        LabelSubtitle.Size = New Size(175, 15)
+        LabelSubtitle.Size = New Size(139, 15)
         LabelSubtitle.TabIndex = 2
-        LabelSubtitle.Text = "Hayo Jangan Lupa ID SAMA PW"
+        LabelSubtitle.Text = "We are glad to see you : )"
         ' 
         ' LabelUsername
         ' 
         LabelUsername.AutoSize = True
-        LabelUsername.Font = New Font("Segoe UI", 9F)
-        LabelUsername.ForeColor = Color.LightGray
-        LabelUsername.Location = New Point(52, 82)
+        LabelUsername.BackColor = Color.Transparent
+        LabelUsername.Font = New Font("Segoe UI", 9.0F)
+        LabelUsername.ForeColor = Color.Transparent
+        LabelUsername.Location = New Point(52, 112)
         LabelUsername.Name = "LabelUsername"
-        LabelUsername.Size = New Size(60, 15)
+        LabelUsername.Size = New Size(69, 15)
         LabelUsername.TabIndex = 3
-        LabelUsername.Text = "Username"
+        LabelUsername.Text = "Username : "
         ' 
         ' TextBoxUsername
         ' 
-        TextBoxUsername.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxUsername.BackColor = Color.White
         TextBoxUsername.BorderStyle = BorderStyle.FixedSingle
-        TextBoxUsername.Font = New Font("Segoe UI", 10F)
-        TextBoxUsername.ForeColor = Color.White
-        TextBoxUsername.Location = New Point(52, 101)
+        TextBoxUsername.Font = New Font("Segoe UI", 10.0F)
+        TextBoxUsername.ForeColor = Color.Black
+        TextBoxUsername.Location = New Point(133, 108)
         TextBoxUsername.Margin = New Padding(3, 2, 3, 2)
         TextBoxUsername.Name = "TextBoxUsername"
         TextBoxUsername.Size = New Size(315, 25)
@@ -163,32 +165,33 @@ Partial Class Login
         ' LabelPassword
         ' 
         LabelPassword.AutoSize = True
-        LabelPassword.Font = New Font("Segoe UI", 9F)
-        LabelPassword.ForeColor = Color.LightGray
-        LabelPassword.Location = New Point(52, 137)
+        LabelPassword.BackColor = Color.Transparent
+        LabelPassword.Font = New Font("Segoe UI", 9.0F)
+        LabelPassword.ForeColor = Color.Transparent
+        LabelPassword.Location = New Point(52, 154)
         LabelPassword.Name = "LabelPassword"
-        LabelPassword.Size = New Size(57, 15)
+        LabelPassword.Size = New Size(63, 15)
         LabelPassword.TabIndex = 5
-        LabelPassword.Text = "Password"
+        LabelPassword.Text = "Password :"
         ' 
         ' TextBoxPassword
         ' 
-        TextBoxPassword.BackColor = Color.FromArgb(CByte(22), CByte(48), CByte(88))
+        TextBoxPassword.BackColor = Color.White
         TextBoxPassword.BorderStyle = BorderStyle.FixedSingle
-        TextBoxPassword.Font = New Font("Segoe UI", 10F)
-        TextBoxPassword.ForeColor = Color.White
-        TextBoxPassword.Location = New Point(52, 156)
+        TextBoxPassword.Font = New Font("Segoe UI", 10.0F)
+        TextBoxPassword.ForeColor = Color.Black
+        TextBoxPassword.Location = New Point(133, 150)
         TextBoxPassword.Margin = New Padding(3, 2, 3, 2)
         TextBoxPassword.Name = "TextBoxPassword"
         TextBoxPassword.PasswordChar = "?"c
-        TextBoxPassword.Size = New Size(294, 25)
+        TextBoxPassword.Size = New Size(273, 25)
         TextBoxPassword.TabIndex = 6
         ' 
         ' CheckBoxShow
         ' 
         CheckBoxShow.AutoSize = True
         CheckBoxShow.ForeColor = Color.LightGray
-        CheckBoxShow.Location = New Point(352, 161)
+        CheckBoxShow.Location = New Point(433, 161)
         CheckBoxShow.Margin = New Padding(3, 2, 3, 2)
         CheckBoxShow.Name = "CheckBoxShow"
         CheckBoxShow.Size = New Size(15, 14)
@@ -200,7 +203,7 @@ Partial Class Login
         LinkForgot.ActiveLinkColor = Color.LightGray
         LinkForgot.AutoSize = True
         LinkForgot.LinkColor = Color.LightGray
-        LinkForgot.Location = New Point(52, 186)
+        LinkForgot.Location = New Point(133, 190)
         LinkForgot.Name = "LinkForgot"
         LinkForgot.Size = New Size(100, 15)
         LinkForgot.TabIndex = 8
@@ -213,9 +216,9 @@ Partial Class Login
         ButtonLogin.FlatAppearance.BorderColor = Color.White
         ButtonLogin.FlatAppearance.BorderSize = 2
         ButtonLogin.FlatStyle = FlatStyle.Flat
-        ButtonLogin.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        ButtonLogin.Font = New Font("Segoe UI Semibold", 9.0F, FontStyle.Bold)
         ButtonLogin.ForeColor = Color.White
-        ButtonLogin.Location = New Point(324, 212)
+        ButtonLogin.Location = New Point(360, 210)
         ButtonLogin.Margin = New Padding(3, 2, 3, 2)
         ButtonLogin.Name = "ButtonLogin"
         ButtonLogin.Size = New Size(88, 26)
@@ -228,9 +231,9 @@ Partial Class Login
         ButtonRegister.BackColor = Color.FromArgb(CByte(60), CByte(60), CByte(70))
         ButtonRegister.FlatAppearance.BorderColor = Color.White
         ButtonRegister.FlatStyle = FlatStyle.Flat
-        ButtonRegister.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        ButtonRegister.Font = New Font("Segoe UI Semibold", 9.0F, FontStyle.Bold)
         ButtonRegister.ForeColor = Color.White
-        ButtonRegister.Location = New Point(230, 212)
+        ButtonRegister.Location = New Point(266, 210)
         ButtonRegister.Margin = New Padding(3, 2, 3, 2)
         ButtonRegister.Name = "ButtonRegister"
         ButtonRegister.Size = New Size(88, 26)
@@ -240,10 +243,10 @@ Partial Class Login
         ' 
         ' Login
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(10), CByte(25), CByte(56))
-        ClientSize = New Size(718, 360)
+        ClientSize = New Size(540, 360)
         Controls.Add(PanelMain)
         Controls.Add(PanelTitle)
         Font = New Font("Segoe UI", 9F)

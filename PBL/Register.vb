@@ -39,4 +39,12 @@ Public Class Register
     Private Sub LabelSubtitle_Click(sender As Object, e As EventArgs) Handles LabelSubtitle.Click
 
     End Sub
+
+    Private Sub LabelTitle_Click(sender As Object, e As EventArgs) Handles LabelTitle.Click
+
+    End Sub
+
+    Private Sub LabelUsername_Click(sender As Object, e As EventArgs) Handles LabelUsername.Click
+
+    End Sub
 End Class

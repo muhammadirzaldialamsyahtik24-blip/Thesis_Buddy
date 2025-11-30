@@ -94,7 +94,19 @@ Public Class Login
 
     End Sub
 
-    Private Sub LabelSubtitle_Click(sender As Object, e As EventArgs) Handles LabelSubtitle.Click
+    Private Sub LabelSubtitle_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub LabelUsername_Click(sender As Object, e As EventArgs) Handles LabelUsername.Click
+
+    End Sub
+
+    Private Sub LabelPassword_Click(sender As Object, e As EventArgs) Handles LabelPassword.Click
+
+    End Sub
+
+    Private Sub PanelMain_Paint(sender As Object, e As PaintEventArgs) Handles PanelMain.Paint
 
     End Sub
 End Class

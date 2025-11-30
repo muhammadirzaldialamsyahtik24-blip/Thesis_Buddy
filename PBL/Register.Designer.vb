@@ -83,7 +83,7 @@ Partial Class Register
         LabelUsername.AutoSize = True
         LabelUsername.Font = New Font("Segoe UI", 9F)
         LabelUsername.ForeColor = Color.LightGray
-        LabelUsername.Location = New Point(52, 74)
+        LabelUsername.Location = New Point(52, 69)
         LabelUsername.Name = "LabelUsername"
         LabelUsername.Size = New Size(60, 15)
         LabelUsername.TabIndex = 3
