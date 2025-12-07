@@ -4,6 +4,9 @@ Imports System.IO
 Public Class Login
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DatabaseHelper.EnsureDefaultAdminUser()
+        DatabaseHelper.EnsureQuestionsTable()
+        DatabaseHelper.SeedMcClellandQuestionnaire()
         ' locate the panel by name to avoid designer sync issues
         Dim found = Me.Controls.Find("PanelCard", True)
         If found.Length > 0 Then

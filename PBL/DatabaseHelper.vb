@@ -47,6 +47,41 @@ Public Module DatabaseHelper
         Return list
     End Function
 
+    Public Function GetAllQuestions(Optional includeInactive As Boolean = True) As List(Of QuestionModel)
+        Dim list As New List(Of QuestionModel)()
+        Dim baseWhere As String = If(includeInactive, String.Empty, " WHERE active = 1")
+        Dim queries As (Sql As String, UseStep As Boolean)() = {
+            ($"SELECT id, qkey, prompt, qtype, options, step, active, category, rule_code, cf_value FROM questions{baseWhere} ORDER BY step, id", True),
+            ($"SELECT id, qkey, prompt, qtype, options, qstep, active, category, rule_code, cf_value FROM questions{baseWhere} ORDER BY qstep, id", False)
+        }
+
+        Try
+            Using conn As MySqlConnection = GetConnection()
+                conn.Open()
+                For i As Integer = 0 To queries.Length - 1
+                    Try
+                        Using cmd As New MySqlCommand(queries(i).Sql, conn)
+                            Using rdr As MySqlDataReader = cmd.ExecuteReader()
+                                While rdr.Read()
+                                    list.Add(MapQuestion(rdr, queries(i).UseStep))
+                                End While
+                            End Using
+                        End Using
+
+                        Exit For
+                    Catch ex As MySqlException
+                        list.Clear()
+                        If i = queries.Length - 1 Then Throw
+                    End Try
+                Next
+            End Using
+        Catch ex As Exception
+            ' ignore errors; caller handles empty list
+        End Try
+
+        Return list
+    End Function
+
     Public Sub SeedMcClellandQuestionnaire(Optional forceReset As Boolean = False)
         Try
             EnsureQuestionsTable()
@@ -167,19 +202,38 @@ Public Module DatabaseHelper
     End Function
 
     Public Function LoginUser(username As String, password As String) As Boolean
+        EnsureUsersTable()
         Using conn As MySqlConnection = GetConnection()
             conn.Open()
             Dim query As String = "SELECT password FROM users WHERE username = @username"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@username", username)
-                Dim hashedPassword As String = Convert.ToString(cmd.ExecuteScalar())
-                If String.IsNullOrEmpty(hashedPassword) Then Return False
-                Return hashedPassword = HashPassword(password)
+                Dim stored As String = Convert.ToString(cmd.ExecuteScalar())
+                If String.IsNullOrEmpty(stored) Then Return False
+
+                Dim hashedInput = HashPassword(password)
+                If stored = hashedInput Then
+                    Return True
+                End If
+
+                ' legacy fallback: stored plaintext or mismatched hash
+                If stored = password Then
+                    Dim updateSql As String = "UPDATE users SET password = @password WHERE username = @username"
+                    Using updateCmd As New MySqlCommand(updateSql, conn)
+                        updateCmd.Parameters.AddWithValue("@password", hashedInput)
+                        updateCmd.Parameters.AddWithValue("@username", username)
+                        updateCmd.ExecuteNonQuery()
+                    End Using
+                    Return True
+                End If
+
+                Return False
             End Using
         End Using
     End Function
 
     Public Function RegisterUser(username As String, password As String) As Boolean
+        EnsureUsersTable()
         Using conn As MySqlConnection = GetConnection()
             conn.Open()
             ' Check if exists
@@ -201,6 +255,59 @@ Public Module DatabaseHelper
             End Using
         End Using
     End Function
+
+    Public Sub EnsureUsersTable()
+        Using conn As MySqlConnection = GetConnection()
+            conn.Open()
+            Dim sql As String = "CREATE TABLE IF NOT EXISTS users (" &
+                                "id INT AUTO_INCREMENT PRIMARY KEY, " &
+                                "username VARCHAR(255) NOT NULL, " &
+                                "password VARCHAR(255) NOT NULL, " &
+                                "role VARCHAR(20) DEFAULT 'user'" &
+                                ") ENGINE=InnoDB;"
+            Using cmd As New MySqlCommand(sql, conn)
+                cmd.ExecuteNonQuery()
+            End Using
+
+            EnsureColumnExists(conn, "users", "role", "VARCHAR(20) DEFAULT 'user'")
+            EnsureIndexExists(conn, "users", "ux_users_username", "UNIQUE KEY ux_users_username (username)")
+        End Using
+    End Sub
+
+    Public Sub EnsureDefaultAdminUser()
+        Try
+            EnsureUsersTable()
+            Using conn As MySqlConnection = GetConnection()
+                conn.Open()
+                Dim hashed = HashPassword("admin123")
+                Dim sqlCheck As String = "SELECT COUNT(*) FROM users WHERE username = @username"
+                Dim existing As Integer
+                Using cmd As New MySqlCommand(sqlCheck, conn)
+                    cmd.Parameters.AddWithValue("@username", "admin")
+                    existing = Convert.ToInt32(cmd.ExecuteScalar())
+                End Using
+
+                If existing = 0 Then
+                    Dim insertSql As String = "INSERT INTO users (username, password, role) VALUES (@username, @password, @role)"
+                    Using insertCmd As New MySqlCommand(insertSql, conn)
+                        insertCmd.Parameters.AddWithValue("@username", "admin")
+                        insertCmd.Parameters.AddWithValue("@password", hashed)
+                        insertCmd.Parameters.AddWithValue("@role", "admin")
+                        insertCmd.ExecuteNonQuery()
+                    End Using
+                Else
+                    Dim updateSql As String = "UPDATE users SET password = @password, role = 'admin' WHERE username = @username"
+                    Using updateCmd As New MySqlCommand(updateSql, conn)
+                        updateCmd.Parameters.AddWithValue("@password", hashed)
+                        updateCmd.Parameters.AddWithValue("@username", "admin")
+                        updateCmd.ExecuteNonQuery()
+                    End Using
+                End If
+            End Using
+        Catch ex As Exception
+            ' ignore ensure errors
+        End Try
+    End Sub
 
     ' --- Consultation history methods ---
     Public Sub EnsureConsultationTable()
@@ -364,6 +471,22 @@ Public Module DatabaseHelper
             ' ignore
         End Try
         Return list
+    End Function
+
+    Public Function SetQuestionActiveState(questionId As Integer, isActive As Boolean) As Boolean
+        Try
+            Using conn As MySqlConnection = GetConnection()
+                conn.Open()
+                Dim sql As String = "UPDATE questions SET active = @active WHERE id = @id"
+                Using cmd As New MySqlCommand(sql, conn)
+                    cmd.Parameters.AddWithValue("@active", If(isActive, 1, 0))
+                    cmd.Parameters.AddWithValue("@id", questionId)
+                    Return cmd.ExecuteNonQuery() > 0
+                End Using
+            End Using
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
     Private Function MapQuestion(rdr As MySqlDataReader, usingStepColumn As Boolean) As QuestionModel

@@ -1,0 +1,99 @@
+Thesis Buddy System Overview
+=============================
+
+Purpose
+-------
+Thesis Buddy membantu mahasiswa menentukan fokus skripsi dengan menyajikan kuesioner motivasi McClelland, melakukan inferensi kategori motivasi (Need for Achievement, Affiliation, Power), dan memberi rekomendasi judul berbasis aturan.
+
+Alur Utama Pengguna
+-------------------
+1. Login & Registrasi
+   - `Login` memastikan tabel `users` ada, menyiapkan akun admin default, dan menyamakan hash password lama.
+   - `Register` membuat akun baru menggunakan hashing SHA-256 + salt via `DatabaseHelper.RegisterUser`.
+2. Kuesioner 150 Pertanyaan
+   - `Question_Form` memuat pertanyaan aktif dari tabel `questions`, menampilkan 10 per halaman dengan navigasi, validasi jawaban, dan scrollbar kustom.
+   - Jawaban disimpan di dictionary `answers` dan di-submit ke `ExpertEngine` setelah semua halaman terisi.
+3. Mesin Inferensi
+   - `MotivationRuleEngine` menjalankan forward chaining dengan Certainty Factor. Rule base didefinisikan di `ExpertEngine`, memetakan setiap qkey terhadap kategori motivasi dan rekomendasi judul.
+   - Output berupa profil motivasi (kategori dominan, skor CF, rekomendasi) sekaligus disimpan ke database lewat `ExpertEngine.SaveConsultationToDb`.
+4. Hasil & Penyimpanan
+   - Pengguna melihat ringkasan (kategori utama + rekomendasi) dalam message box. Riwayat konsultasi ditulis ke tabel `consultations` untuk analisis lanjutan.
+
+Fitur Admin
+-----------
+- Form `Admin` menampilkan dashboard:
+  - Kartu statistik (total pertanyaan, aktif, waktu sinkronisasi).
+  - Toolbar pencarian, tombol refresh, dan tombol "Seed Question Bank".
+  - `DataGridView` memperlihatkan daftar pertanyaan (qkey, prompt, kategori, tipe, step, CF, status).
+  - Tombol aksi (Tambah, Edit placeholder, Toggle Aktif/Nonaktif, Tutup).
+- `Admin.vb` memanfaatkan `DatabaseHelper.GetAllQuestions` serta `SetQuestionActiveState` untuk mengelola bank pertanyaan.
+- Tombol seed menjalankan `DatabaseHelper.SeedMcClellandQuestionnaire(True)` untuk menimpa data pertanyaan dengan isi `assets/mcclelland_questionnaire.txt`.
+
+Lapisan Data
+------------
+- `DatabaseHelper` menangani koneksi MySQL dan operasi CRUD:
+  - Tabel `users`, `questions`, dan `consultations` dipastikan ada lewat helper `Ensure*`.
+  - Password disimpan dengan SHA-256 + salt, disertai fallback upgrade untuk akun lama.
+  - Pertanyaan diambil via `GetAllActiveQuestions` untuk UI pengguna dan `GetAllQuestions` untuk admin.
+  - Seeding pembacaan file kuesioner membuat record 150 pertanyaan lengkap dengan qkey, rule code, kategori, dan nilai CF.
+
+Arsitektur UI
+-------------
+- WinForms (.NET 8) dengan gaya gelap:
+  - `Login` & `Register` menggunakan kartu dengan sudut melengkung.
+  - `Question_Form` memakai `BufferedFlowLayoutPanel` agar scroll halus, plus custom scrollbar panel.
+  - `Admin` memanfaatkan layout panel responsif (TableLayoutPanel + FlowLayoutPanel) untuk pengalaman dashboard.
+
+Ringkasan Proses Teknis
+-----------------------
+1. Startup login → seed user admin + pertanyaan jika belum ada.
+2. User login atau registrasi baru (hash + validasi DB).
+3. Pengguna membuka kuesioner, menjawab 150 pertanyaan (10 per halaman), sistem menyimpan jawaban di memori.
+4. Saat submit, `MotivationRuleEngine` menghitung skor CF per kategori, menentukan kategori dominan, dan menghasilkan rekomendasi judul.
+5. Hasil disajikan serta disimpan ke tabel `consultations`.
+6. Admin dapat memantau/kelola pertanyaan melalui dashboard, termasuk toggle status dan forced seeding.
+
+Catatan Presentasi
+------------------
+- Tekankan integrasi data-driven (pertanyaan di file → seeding → UI → rule engine → rekomendasi → histori DB).
+- Soroti pengalaman pengguna (pagination kuesioner, validasi, custom UI) dan fitur admin (dashboard, pencarian, seeding).
+- Jelaskan keamanan dasar (hash password + fallback upgrade) dan modularitas (engine terpisah, helper DB, UI forms).
+
+Cara Kerja Sistem Pakar (Detail)
+--------------------------------
+1. Inisialisasi Aplikasi
+   - `Login_Load` memanggil `DatabaseHelper.EnsureDefaultAdminUser`, `EnsureQuestionsTable`, dan `SeedMcClellandQuestionnaire` sehingga struktur tabel, akun admin, serta 150 soal otomatis siap.
+   - File `assets/mcclelland_questionnaire.txt` diparsing menjadi qkey, rule code, kategori, dan nilai CF. `SeedMcClellandQuestionnaire` menghitung step blok (10 soal per kategori) agar pagination tersusun konsisten.
+2. Autentikasi Pengguna
+   - Hash password menggunakan SHA-256 + salt sederhana (`HashPassword`). Saat login, sistem juga melakukan _legacy upgrade_: jika hash tidak cocok tetapi tersimpan plaintext, sistem meng-hash ulang otomatis.
+3. Pengumpulan Fakta (Kuesioner)
+   - `Question_Form` mengambil pertanyaan aktif dari database, menaruhnya dalam daftar, lalu merender 10 kartu soal per halaman. Setiap kontrol input memanggil `answers(qkey) = nilai` ketika berubah.
+   - Pengguna tidak bisa berpindah halaman sebelum semua pertanyaan pada halaman tersebut terisi (`ValidateCurrentPage`).
+4. Inferensi Pengetahuan
+   - Ketika tombol Submit ditekan, seluruh dictionary `answers` dikirim ke `ExpertEngine.Evaluate`.
+   - `ExpertEngine` membentuk `MotivationRuleRepository` dari bank pertanyaan, lalu menjalankan `MotivationInferenceEngine`. Mesin ini mengaplikasikan aturan Certainty Factor untuk menghitung skor nAch, nAff, nPow serta menyimpan _evidence_ (qkey mana yang mendukung kategori tertentu).
+   - Fungsi `GetRecommendations` memetakan kategori dominan ke daftar ide judul skripsi.
+5. Penyimpanan Penalaran
+   - `ExpertEngine.SaveConsultationToDb` menyimpan username, timestamp, jawaban (JSON), dan hasil profile (JSON) ke tabel `consultations`. Data ini bisa dipakai ulang untuk evaluasi atau penelusuran keputusan.
+6. Presentasi Hasil
+   - `Question_Form` menampilkan hasil ringkas (kategori utama + rekomendasi) melalui dialog; UI dapat diperluas untuk menampilkan bukti CF atau grafik skor.
+7. Manajemen Pengetahuan
+   - Admin dapat mengaktifkan/menonaktifkan soal, melakukan seeding ulang (misalnya jika file assets diperbarui), serta memantau metadata pertanyaan.
+
+Sequence Teknis Singkat
+-----------------------
+1. User menjalankan aplikasi → form Login memastikan database siap.
+2. User login/registrasi → kredensial diverifikasi/ditulis ke tabel `users`.
+3. User memilih menu kuesioner → `Question_Form` memuat soal aktif → user mengisi semua halaman.
+4. Submit → `ExpertEngine` melakukan inferensi → rekomendasi dibentuk.
+5. Hasil ditampilkan + histori konsultasi tersimpan.
+6. Admin sewaktu-waktu membuka dashboard untuk memelihara bank pertanyaan guna menjaga kualitas rule base.
+
+Komponen Penting untuk Dipresentasikan
+--------------------------------------
+- **Knowledge Base**: Kombinasi tabel `questions`, file McClelland, dan rule CF di `MotivationRuleRepository`.
+- **Inference Engine**: `MotivationInferenceEngine` + Certainty Factor yang menyatukan evidence dari jawaban user.
+- **Working Memory**: Dictionary `answers` pada `Question_Form` beserta JSON yang disimpan di tabel `consultations`.
+- **User Interface**: Form WinForms dengan pengalaman modern (pagination, custom scrollbar, kartu statistik admin).
+- **Database Layer**: `DatabaseHelper` sebagai gateway ke MySQL, bertugas menjaga skema, hashing, dan transaksi penting.
+- **Admin Tools**: Dashboard CRUD ringan untuk menjaga kualitas pertanyaan serta memicu seeding ulang bila konten kajian diperbarui.
