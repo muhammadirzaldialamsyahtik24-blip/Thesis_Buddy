@@ -12,7 +12,6 @@ Public Class Question_Form
     Private Shared ReadOnly METHOD_OPTIONS As String() = {"Experimental", "R&D", "Case Study", "Simulation"}
     Private Shared ReadOnly OUTPUT_OPTIONS As String() = {"Aplikasi", "Game", "IoT Device", "Model AI", "Other"}
     Private Shared ReadOnly YESNO_OPTIONS As String() = {"Ya", "Tidak"}
-
     Private Shared ReadOnly LANGUAGE_LIST As String() = {"Python", "Java", "C++", "C#", "JavaScript", "PHP", "Kotlin", "Go", "R", "MATLAB"}
 
     Private answers As New Dictionary(Of String, Object)()

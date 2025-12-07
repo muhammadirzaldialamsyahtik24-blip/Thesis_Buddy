@@ -70,8 +70,8 @@ Partial Class Main_Menu
         ' 
         LabelTitle.AutoSize = True
         LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
-        LabelTitle.ForeColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
-        LabelTitle.Location = New Point(36, 28)
+        LabelTitle.ForeColor = Color.White
+        LabelTitle.Location = New Point(17, 11)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(149, 32)
         LabelTitle.TabIndex = 3
@@ -85,9 +85,9 @@ Partial Class Main_Menu
         ButtonStart.FlatStyle = FlatStyle.Flat
         ButtonStart.Font = New Font("Segoe UI Semibold", 11F, FontStyle.Bold)
         ButtonStart.ForeColor = Color.White
-        ButtonStart.Location = New Point(200, 260)
+        ButtonStart.Location = New Point(17, 286)
         ButtonStart.Name = "ButtonStart"
-        ButtonStart.Size = New Size(220, 40)
+        ButtonStart.Size = New Size(153, 57)
         ButtonStart.TabIndex = 4
         ButtonStart.Text = "Start"
         ButtonStart.UseVisualStyleBackColor = False
@@ -100,9 +100,9 @@ Partial Class Main_Menu
         ButtonAbout.FlatStyle = FlatStyle.Flat
         ButtonAbout.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
         ButtonAbout.ForeColor = Color.White
-        ButtonAbout.Location = New Point(36, 260)
+        ButtonAbout.Location = New Point(307, 304)
         ButtonAbout.Name = "ButtonAbout"
-        ButtonAbout.Size = New Size(140, 40)
+        ButtonAbout.Size = New Size(61, 39)
         ButtonAbout.TabIndex = 5
         ButtonAbout.Text = "About"
         ButtonAbout.UseVisualStyleBackColor = False
@@ -115,9 +115,9 @@ Partial Class Main_Menu
         ButtonExit.FlatStyle = FlatStyle.Flat
         ButtonExit.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
         ButtonExit.ForeColor = Color.White
-        ButtonExit.Location = New Point(36, 312)
+        ButtonExit.Location = New Point(383, 304)
         ButtonExit.Name = "ButtonExit"
-        ButtonExit.Size = New Size(100, 36)
+        ButtonExit.Size = New Size(61, 39)
         ButtonExit.TabIndex = 6
         ButtonExit.Text = "Exit"
         ButtonExit.UseVisualStyleBackColor = False

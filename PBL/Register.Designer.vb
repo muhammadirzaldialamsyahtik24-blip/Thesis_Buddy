@@ -84,7 +84,7 @@ Partial Class Register
         ' 
         LabelTitle.AutoSize = True
         LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
-        LabelTitle.ForeColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
+        LabelTitle.ForeColor = Color.White
         LabelTitle.Location = New Point(36, 28)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(213, 32)
@@ -95,7 +95,7 @@ Partial Class Register
         ' 
         LabelSubtitle.AutoSize = True
         LabelSubtitle.Font = New Font("Segoe UI", 9F)
-        LabelSubtitle.ForeColor = Color.LightGray
+        LabelSubtitle.ForeColor = Color.DimGray
         LabelSubtitle.Location = New Point(36, 70)
         LabelSubtitle.Name = "LabelSubtitle"
         LabelSubtitle.Size = New Size(135, 15)
@@ -188,9 +188,9 @@ Partial Class Register
         ButtonBack.FlatStyle = FlatStyle.Flat
         ButtonBack.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
         ButtonBack.ForeColor = Color.White
-        ButtonBack.Location = New Point(36, 300)
+        ButtonBack.Location = New Point(384, 14)
         ButtonBack.Name = "ButtonBack"
-        ButtonBack.Size = New Size(140, 40)
+        ButtonBack.Size = New Size(64, 25)
         ButtonBack.TabIndex = 12
         ButtonBack.Text = "Back"
         ButtonBack.UseVisualStyleBackColor = False
@@ -201,13 +201,13 @@ Partial Class Register
         ButtonRegister.FlatAppearance.BorderColor = Color.White
         ButtonRegister.FlatAppearance.BorderSize = 2
         ButtonRegister.FlatStyle = FlatStyle.Flat
-        ButtonRegister.Font = New Font("Segoe UI Semibold", 11F, FontStyle.Bold)
+        ButtonRegister.Font = New Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         ButtonRegister.ForeColor = Color.White
-        ButtonRegister.Location = New Point(304, 300)
+        ButtonRegister.Location = New Point(36, 299)
         ButtonRegister.Name = "ButtonRegister"
         ButtonRegister.Size = New Size(120, 40)
         ButtonRegister.TabIndex = 13
-        ButtonRegister.Text = "Create account"
+        ButtonRegister.Text = "Create"
         ButtonRegister.UseVisualStyleBackColor = False
         ' 
         ' Register

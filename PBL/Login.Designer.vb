@@ -83,7 +83,7 @@ Partial Class Login
         ' 
         LabelTitle.AutoSize = True
         LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
-        LabelTitle.ForeColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
+        LabelTitle.ForeColor = Color.White
         LabelTitle.Location = New Point(36, 28)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(293, 32)
@@ -94,7 +94,7 @@ Partial Class Login
         ' 
         LabelSubtitle.AutoSize = True
         LabelSubtitle.Font = New Font("Segoe UI", 9F)
-        LabelSubtitle.ForeColor = Color.LightGray
+        LabelSubtitle.ForeColor = Color.DimGray
         LabelSubtitle.Location = New Point(36, 70)
         LabelSubtitle.Name = "LabelSubtitle"
         LabelSubtitle.Size = New Size(115, 15)
@@ -158,9 +158,9 @@ Partial Class Login
         ' 
         ' LinkForgot
         ' 
-        LinkForgot.ActiveLinkColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
+        LinkForgot.ActiveLinkColor = Color.FromArgb(CByte(255), CByte(128), CByte(128))
         LinkForgot.AutoSize = True
-        LinkForgot.LinkColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
+        LinkForgot.LinkColor = Color.Maroon
         LinkForgot.Location = New Point(36, 245)
         LinkForgot.Name = "LinkForgot"
         LinkForgot.Size = New Size(118, 19)
@@ -176,7 +176,7 @@ Partial Class Login
         ButtonRegister.FlatStyle = FlatStyle.Flat
         ButtonRegister.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
         ButtonRegister.ForeColor = Color.White
-        ButtonRegister.Location = New Point(36, 288)
+        ButtonRegister.Location = New Point(87, 288)
         ButtonRegister.Name = "ButtonRegister"
         ButtonRegister.Size = New Size(140, 40)
         ButtonRegister.TabIndex = 11
@@ -191,7 +191,7 @@ Partial Class Login
         ButtonLogin.FlatStyle = FlatStyle.Flat
         ButtonLogin.Font = New Font("Segoe UI Semibold", 11F, FontStyle.Bold)
         ButtonLogin.ForeColor = Color.White
-        ButtonLogin.Location = New Point(304, 288)
+        ButtonLogin.Location = New Point(267, 288)
         ButtonLogin.Name = "ButtonLogin"
         ButtonLogin.Size = New Size(120, 40)
         ButtonLogin.TabIndex = 12

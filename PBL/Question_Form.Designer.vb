@@ -75,7 +75,7 @@ Partial Class Question_Form
         ' 
         LabelTitle.AutoSize = True
         LabelTitle.Font = New Font("Segoe UI Semibold", 18F, FontStyle.Bold)
-        LabelTitle.ForeColor = Color.FromArgb(CByte(72), CByte(233), CByte(223))
+        LabelTitle.ForeColor = Color.White
         LabelTitle.Location = New Point(36, 18)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(296, 32)
@@ -85,8 +85,8 @@ Partial Class Question_Form
         ' LabelSubtitle
         ' 
         LabelSubtitle.AutoSize = True
-        LabelSubtitle.Font = New Font("Segoe UI", 10F)
-        LabelSubtitle.ForeColor = Color.FromArgb(CByte(160), CByte(160), CByte(160))
+        LabelSubtitle.Font = New Font("Segoe UI", 10.0F)
+        LabelSubtitle.ForeColor = Color.DimGray
         LabelSubtitle.Location = New Point(37, 58)
         LabelSubtitle.Name = "LabelSubtitle"
         LabelSubtitle.Size = New Size(125, 19)
