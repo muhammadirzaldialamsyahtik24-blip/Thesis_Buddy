@@ -106,7 +106,7 @@ Partial Class Register
         ' 
         LabelUsername.AutoSize = True
         LabelUsername.Font = New Font("Segoe UI", 9.0F)
-        LabelUsername.ForeColor = Color.LightGray
+        LabelUsername.ForeColor = Color.DimGray
         LabelUsername.Location = New Point(40, 143)
         LabelUsername.Name = "LabelUsername"
         LabelUsername.Size = New Size(60, 15)
@@ -128,7 +128,7 @@ Partial Class Register
         ' 
         LabelPassword.AutoSize = True
         LabelPassword.Font = New Font("Segoe UI", 9.0F)
-        LabelPassword.ForeColor = Color.LightGray
+        LabelPassword.ForeColor = Color.DimGray
         LabelPassword.Location = New Point(40, 214)
         LabelPassword.Name = "LabelPassword"
         LabelPassword.Size = New Size(57, 15)
@@ -151,7 +151,7 @@ Partial Class Register
         ' 
         LabelConfirm.AutoSize = True
         LabelConfirm.Font = New Font("Segoe UI", 9.0F)
-        LabelConfirm.ForeColor = Color.LightGray
+        LabelConfirm.ForeColor = Color.DimGray
         LabelConfirm.Location = New Point(40, 287)
         LabelConfirm.Name = "LabelConfirm"
         LabelConfirm.Size = New Size(104, 15)

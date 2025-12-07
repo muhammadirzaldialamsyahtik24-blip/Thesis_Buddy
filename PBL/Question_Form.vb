@@ -3,8 +3,9 @@ Imports System.Text.Json
 Imports System.Drawing.Drawing2D
 Imports System.IO
 Imports System.Linq
+Imports System.Reflection
 
-Public Class Question_Form
+Public Partial Class Question_Form
 
     Private Shared ReadOnly PRODI_OPTIONS As String() = {"TI", "TMJ", "TMD", "Lainnya"}
     Private Shared ReadOnly PS_OPTIONS As String() = {"0.0", "0.2", "0.4", "0.6", "0.8", "1.0"}
@@ -17,6 +18,8 @@ Public Class Question_Form
 
     Private answers As New Dictionary(Of String, Object)()
     Private currentStep As Integer = 1
+    Private questionLayoutHandlerAttached As Boolean = False
+    Private questionsPanelCache As FlowLayoutPanel
 
 
     Private Sub Question_Form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -24,13 +27,8 @@ Public Class Question_Form
         Dim found = Me.Controls.Find("PanelCard", True)
         If found.Length > 0 Then
             Dim panelCard As Panel = DirectCast(found(0), Panel)
-            Dim leftFound = Me.Controls.Find("PanelLeft", True)
-            If leftFound.Length > 0 Then
-                Dim panelLeft As Panel = DirectCast(leftFound(0), Panel)
-                Dim margin As Integer = 30
-                panelCard.Left = panelLeft.Right + margin
-                panelCard.Top = (Me.ClientSize.Height - panelCard.Height) \ 2
-            End If
+            panelCard.Left = Math.Max(20, (Me.ClientSize.Width - panelCard.Width) \ 2)
+            panelCard.Top = 30
 
             Try
                 Dim r As Integer = 16
@@ -49,26 +47,42 @@ Public Class Question_Form
 
         If PictureLogo IsNot Nothing Then
             PictureLogo.SizeMode = PictureBoxSizeMode.Zoom
-            PictureLogo.Width = 280
-            PictureLogo.Height = 360
-            PictureLogo.Left = (PanelLeft.Width - PictureLogo.Width) \ 2
-            PictureLogo.Top = 40
+            PictureLogo.Width = 80
+            PictureLogo.Height = 80
+            PictureLogo.Left = 24
+            PictureLogo.Top = 24
+            PictureLogo.BackColor = Color.Transparent
         End If
 
         If LabelTitle IsNot Nothing Then
             LabelTitle.Text = "Sistem Pakar ThesisBuddy"
             LabelTitle.ForeColor = Color.FromArgb(59, 130, 246)
+            If PictureLogo IsNot Nothing Then
+                LabelTitle.Left = PictureLogo.Right + 18
+                LabelTitle.Top = PictureLogo.Top
+            End If
         End If
 
         If LabelSubtitle IsNot Nothing Then
             LabelSubtitle.Text = "Rekomendasi Teknologi untuk Skripsimu"
             LabelSubtitle.ForeColor = Color.FromArgb(107, 114, 128)
+            If LabelTitle IsNot Nothing Then
+                LabelSubtitle.Left = LabelTitle.Left
+                LabelSubtitle.Top = LabelTitle.Bottom - 4
+            End If
         End If
 
-        If FlowLayoutPanelQuestions IsNot Nothing Then
-            FlowLayoutPanelQuestions.Padding = New Padding(16)
-            FlowLayoutPanelQuestions.Margin = New Padding(0, 16, 0, 0)
-            FlowLayoutPanelQuestions.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
+        Dim questionsPanel = ResolveQuestionsPanel()
+        If questionsPanel IsNot Nothing Then
+            questionsPanel.Padding = New Padding(16)
+            questionsPanel.Margin = New Padding(0, 16, 0, 0)
+            questionsPanel.AutoScrollMargin = New Size(0, 24)
+            questionsPanel.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
+            EnableDoubleBuffer(questionsPanel)
+        End If
+
+        If PanelNav IsNot Nothing Then
+            EnableDoubleBuffer(PanelNav)
         End If
 
         Try
@@ -85,193 +99,50 @@ Public Class Question_Form
         ShowQuestionsForStep(currentStep)
     End Sub
 
-    Private Function ControlWidth() As Integer
-        Dim w = FlowLayoutPanelQuestions.ClientSize.Width - FlowLayoutPanelQuestions.Padding.Horizontal - 10
-        If w < 100 Then w = 100
-        Return w
+    Private Function ResolveQuestionsPanel() As FlowLayoutPanel
+        If questionsPanelCache Is Nothing OrElse questionsPanelCache.IsDisposed Then
+            Dim matches = Me.Controls.Find("FlowLayoutPanelQuestions", True)
+            If matches.Length > 0 Then
+                questionsPanelCache = TryCast(matches(0), FlowLayoutPanel)
+            End If
+        End If
+        Return questionsPanelCache
     End Function
 
     Private Sub ShowQuestionsForStep(stepIndex As Integer)
-        FlowLayoutPanelQuestions.Controls.Clear()
+        Dim questionsPanel = ResolveQuestionsPanel()
+        If questionsPanel Is Nothing Then Return
+
+        questionsPanel.SuspendLayout()
+        questionsPanel.Controls.Clear()
         PanelNav.Controls.Clear()
 
         Dim baseTextColor = Color.FromArgb(31, 41, 55)
         Dim mutedTextColor = Color.FromArgb(107, 114, 128)
         Dim primaryColor = Color.FromArgb(59, 130, 246)
         Dim accentDanger = Color.FromArgb(239, 68, 68)
-        Dim inputMargin = New Padding(0, 0, 0, 12)
+        Dim inputMargin = New Padding(0, 0, 0, 10)
+
+        AttachQuestionLayoutHandler()
+
         Dim questions = DatabaseHelper.GetQuestionsByStep(stepIndex)
         If questions Is Nothing OrElse questions.Count = 0 Then
-            Dim lbl As New Label With {.Text = "Tidak ada pertanyaan di langkah ini.", .ForeColor = Color.LightGray, .AutoSize = True}
-            FlowLayoutPanelQuestions.Controls.Add(lbl)
+            Dim lbl As New Label With {
+                .Text = "Tidak ada pertanyaan di langkah ini.",
+                .ForeColor = mutedTextColor,
+                .AutoSize = True,
+                .Margin = New Padding(0, 10, 0, 0)
+            }
+            questionsPanel.Controls.Add(lbl)
         Else
-            For Each q In questions
-                Dim lbl As New Label()
-                Dim promptText As String = q.Prompt
-                If Not String.IsNullOrWhiteSpace(q.QKey) Then
-                    promptText = $"[{q.QKey}] {q.Prompt}"
-                End If
-                lbl.Text = promptText
-                lbl.ForeColor = baseTextColor
-                lbl.AutoSize = False
-                lbl.Width = ControlWidth()
-                lbl.Height = 24
-                lbl.Font = New Font("Segoe UI", 10.5F, FontStyle.Regular)
-                lbl.Margin = New Padding(0, 0, 0, 4)
-                FlowLayoutPanelQuestions.Controls.Add(lbl)
-
-                Dim typ As String = ""
-                If q.QType IsNot Nothing Then typ = q.QType.ToLower()
-
-                Select Case typ
-                    Case "text", "string"
-                        Dim tb As New TextBox()
-                        tb.Width = ControlWidth()
-                        tb.ForeColor = baseTextColor
-                        tb.BackColor = Color.White
-                        tb.BorderStyle = BorderStyle.FixedSingle
-                        tb.Margin = inputMargin
-                        FlowLayoutPanelQuestions.Controls.Add(tb)
-                        AddHandler tb.LostFocus, Sub(s, ev) answers(q.QKey) = tb.Text
-
-                    Case "number"
-                        Dim tbn As New TextBox()
-                        tbn.Width = ControlWidth()
-                        tbn.ForeColor = baseTextColor
-                        tbn.BackColor = Color.White
-                        tbn.BorderStyle = BorderStyle.FixedSingle
-                        tbn.Margin = inputMargin
-                        FlowLayoutPanelQuestions.Controls.Add(tbn)
-                        AddHandler tbn.LostFocus, Sub(s, ev)
-                                                      Dim d As Double
-                                                      If Double.TryParse(tbn.Text, d) Then
-                                                          answers(q.QKey) = d
-                                                      Else
-                                                          answers(q.QKey) = 0.0
-                                                      End If
-                                                  End Sub
-
-                    Case "kvlist"
-
-                        Dim cols As Integer = 3
-                        Dim rows As Integer = CInt(Math.Ceiling(LANGUAGE_LIST.Length / CDbl(cols)))
-                        Dim tlp As New TableLayoutPanel()
-                        tlp.AutoSize = True
-                        tlp.ColumnCount = cols
-                        tlp.RowCount = rows
-                        tlp.CellBorderStyle = TableLayoutPanelCellBorderStyle.None
-                        tlp.Width = ControlWidth()
-                        tlp.Padding = New Padding(0)
-                        tlp.Margin = New Padding(0, 4, 0, 12)
-
-                        For i As Integer = 0 To cols - 1
-                            tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, CSng(100.0 / cols)))
-                        Next
-
-                        Dim idx As Integer = 0
-                        For Each lang In LANGUAGE_LIST
-                            Dim r = idx \ cols
-                            Dim c = idx Mod cols
-
-                            Dim itemPanel As New Panel()
-                            itemPanel.AutoSize = True
-                            itemPanel.Padding = New Padding(2)
-
-                            Dim l As New Label()
-                            l.Text = lang
-                            l.ForeColor = baseTextColor
-                            l.AutoSize = True
-                            l.Top = 2
-                            l.Left = 2
-                            itemPanel.Controls.Add(l)
-
-                            Dim nud As New NumericUpDown()
-                            nud.Minimum = CDec(0)
-                            nud.Maximum = CDec(5)
-                            nud.DecimalPlaces = 1
-                            nud.Increment = CDec(0.1)
-                            nud.Value = CDec(0)
-                            nud.Width = 90
-                            nud.Top = l.Bottom + 6
-                            nud.Left = 2
-                            nud.ForeColor = baseTextColor
-                            nud.BackColor = Color.White
-                            nud.Tag = lang
-
-                            AddHandler nud.ValueChanged, AddressOf LanguageNumeric_ValueChanged
-                            AddHandler nud.GotFocus, AddressOf LanguageNumeric_GotFocus
-                            AddHandler nud.LostFocus, AddressOf LanguageNumeric_LostFocus
-
-                            itemPanel.Controls.Add(nud)
-
-                            Dim placeholder As New Panel()
-                            placeholder.AutoSize = True
-                            placeholder.Controls.Add(itemPanel)
-
-
-                            While tlp.RowCount <= r
-                                tlp.RowCount += 1
-                                tlp.RowStyles.Add(New RowStyle(SizeType.AutoSize))
-                            End While
-
-                            tlp.Controls.Add(placeholder, c, r)
-
-                            idx += 1
-                        Next
-
-                        FlowLayoutPanelQuestions.Controls.Add(tlp)
-                        UpdateKvlistAnswers(tlp, q.QKey)
-
-                    Case "select"
-                        Dim cb As New ComboBox()
-                        cb.Width = ControlWidth()
-                        cb.ForeColor = baseTextColor
-                        cb.BackColor = Color.White
-                        cb.DropDownStyle = ComboBoxStyle.DropDownList
-                        cb.FlatStyle = FlatStyle.Flat
-                        cb.Margin = inputMargin
-                        If Not String.IsNullOrWhiteSpace(q.Options) Then
-                            cb.Items.AddRange(q.Options.Split({","c}, StringSplitOptions.RemoveEmptyEntries))
-                        End If
-                        FlowLayoutPanelQuestions.Controls.Add(cb)
-                        AddHandler cb.SelectedIndexChanged, Sub(s, ev) If cb.SelectedItem IsNot Nothing Then answers(q.QKey) = cb.SelectedItem.ToString()
-
-                    Case "yesno"
-                        Dim cbyn As New ComboBox()
-                        cbyn.Width = ControlWidth()
-                        cbyn.DropDownStyle = ComboBoxStyle.DropDownList
-                        cbyn.Items.AddRange(YESNO_OPTIONS)
-                        cbyn.ForeColor = baseTextColor
-                        cbyn.BackColor = Color.White
-                        cbyn.FlatStyle = FlatStyle.Flat
-                        cbyn.Margin = inputMargin
-                        If answers.ContainsKey(q.QKey) Then
-                            Dim existing = Convert.ToString(answers(q.QKey))
-                            If Not String.IsNullOrWhiteSpace(existing) AndAlso cbyn.Items.Contains(existing) Then
-                                cbyn.SelectedItem = existing
-                            End If
-                        End If
-                        FlowLayoutPanelQuestions.Controls.Add(cbyn)
-                        AddHandler cbyn.SelectedIndexChanged, Sub(s, ev) If cbyn.SelectedItem IsNot Nothing Then answers(q.QKey) = cbyn.SelectedItem.ToString()
-
-                    Case Else
-                        Dim tbf As New TextBox()
-                        tbf.Width = ControlWidth()
-                        tbf.ForeColor = baseTextColor
-                        tbf.BackColor = Color.White
-                        tbf.BorderStyle = BorderStyle.FixedSingle
-                        tbf.Margin = inputMargin
-                        FlowLayoutPanelQuestions.Controls.Add(tbf)
-                        AddHandler tbf.LostFocus, Sub(s, ev) answers(q.QKey) = tbf.Text
-                End Select
-
-                Dim spacer As New Label()
-                spacer.Height = 4
-                spacer.AutoSize = False
-                FlowLayoutPanelQuestions.Controls.Add(spacer)
+            For i As Integer = 0 To questions.Count - 1
+                Dim card = CreateQuestionCard(questions(i), baseTextColor, mutedTextColor, primaryColor, inputMargin, i + 1)
+                questionsPanel.Controls.Add(card)
             Next
         End If
 
+        questionsPanel.ResumeLayout()
+        ApplyQuestionCardWidth()
 
         If stepIndex > 1 Then
             Dim btnPrev As New Button()
@@ -335,6 +206,332 @@ Public Class Question_Form
         PanelNav.Controls.Add(btnCancelNav)
     End Sub
 
+    Private Sub AttachQuestionLayoutHandler()
+        Dim questionsPanel = ResolveQuestionsPanel()
+        If questionLayoutHandlerAttached OrElse questionsPanel Is Nothing Then Return
+        AddHandler questionsPanel.SizeChanged, Sub(sender As Object, e As EventArgs) ApplyQuestionCardWidth()
+        questionLayoutHandlerAttached = True
+    End Sub
+
+    Private Sub ApplyQuestionCardWidth()
+        Dim questionsPanel = ResolveQuestionsPanel()
+        If questionsPanel Is Nothing Then Return
+        Dim availableWidth = questionsPanel.ClientSize.Width - questionsPanel.Padding.Horizontal
+        If availableWidth <= 0 Then Return
+        For Each ctrl As Control In questionsPanel.Controls
+            If TypeOf ctrl Is Panel AndAlso ctrl.Tag IsNot Nothing AndAlso ctrl.Tag.ToString().StartsWith("question-card") Then
+                ctrl.Width = Math.Max(availableWidth, 200)
+            End If
+        Next
+    End Sub
+
+    Private Sub EnableDoubleBuffer(ctrl As Control)
+        If ctrl Is Nothing Then Return
+        Dim prop = GetType(Control).GetProperty("DoubleBuffered", BindingFlags.Instance Or BindingFlags.NonPublic)
+        If prop IsNot Nothing Then
+            prop.SetValue(ctrl, True, Nothing)
+        End If
+    End Sub
+
+    Private Function CreateQuestionCard(question As QuestionModel, baseTextColor As Color, mutedTextColor As Color, primaryColor As Color, inputMargin As Padding, questionNumber As Integer) As Control
+        Dim card As New Panel()
+        card.Tag = $"question-card|{question.QKey}"
+        card.BackColor = Color.FromArgb(250, 251, 254)
+        card.Padding = New Padding(18)
+        card.Margin = New Padding(0, 0, 0, 14)
+        card.AutoSize = True
+        card.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        card.MinimumSize = New Size(0, 90)
+        card.BorderStyle = BorderStyle.None
+        AddHandler card.Paint, AddressOf Card_Paint
+        EnableDoubleBuffer(card)
+
+        Dim container As New TableLayoutPanel()
+        container.ColumnCount = 1
+        container.RowCount = 3
+        container.Dock = DockStyle.Fill
+        container.AutoSize = True
+        container.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        container.Padding = New Padding(0)
+        container.Margin = New Padding(0)
+        container.RowStyles.Clear()
+        container.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+        container.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+        container.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+
+        Dim header As New FlowLayoutPanel()
+        header.AutoSize = True
+        header.Margin = New Padding(0, 0, 0, 6)
+        header.Padding = New Padding(0)
+        header.WrapContents = False
+
+        Dim questionLabel = questionNumber.ToString("00")
+        Dim numberBadge As New Label()
+        numberBadge.Text = $"Q{questionLabel}"
+        numberBadge.AutoSize = True
+        numberBadge.Padding = New Padding(10, 4, 10, 4)
+        numberBadge.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+        numberBadge.ForeColor = Color.White
+        numberBadge.BackColor = Color.FromArgb(37, 99, 235)
+        numberBadge.Margin = New Padding(0, 0, 8, 0)
+        header.Controls.Add(numberBadge)
+
+        Dim keyBadge As New Label()
+        keyBadge.Text = If(String.IsNullOrWhiteSpace(question.QKey), "QUESTION", question.QKey)
+        keyBadge.AutoSize = True
+        keyBadge.Padding = New Padding(8, 4, 8, 4)
+        keyBadge.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+        keyBadge.ForeColor = primaryColor
+        keyBadge.BackColor = Color.FromArgb(229, 244, 255)
+        keyBadge.Margin = New Padding(0, 0, 8, 0)
+        header.Controls.Add(keyBadge)
+
+        Dim categoryText = If(String.IsNullOrWhiteSpace(question.Category), "General", question.Category)
+        Dim categoryBadge As New Label()
+        categoryBadge.Text = categoryText
+        categoryBadge.AutoSize = True
+        categoryBadge.Padding = New Padding(8, 4, 8, 4)
+        categoryBadge.Font = New Font("Segoe UI", 9.0F, FontStyle.Regular)
+        categoryBadge.ForeColor = mutedTextColor
+        categoryBadge.BackColor = Color.FromArgb(244, 246, 248)
+        header.Controls.Add(categoryBadge)
+
+        Dim promptText As String = question.Prompt
+        If Not String.IsNullOrWhiteSpace(question.QKey) Then
+            promptText = $"[{question.QKey}] {question.Prompt}"
+        End If
+
+        Dim lbl As New Label()
+        lbl.Text = promptText
+        lbl.ForeColor = baseTextColor
+        lbl.AutoSize = True
+        lbl.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
+        lbl.Margin = New Padding(0, 0, 0, 14)
+        lbl.MaximumSize = New Size(900, 0)
+
+        Dim inputControl = BuildInputControl(question, baseTextColor, primaryColor, inputMargin)
+
+        container.Controls.Add(header, 0, 0)
+        container.Controls.Add(lbl, 0, 1)
+        container.Controls.Add(inputControl, 0, 2)
+
+        card.Controls.Add(container)
+
+        Return card
+    End Function
+
+    Private Function BuildInputControl(question As QuestionModel, baseTextColor As Color, primaryColor As Color, inputMargin As Padding) As Control
+        Dim typ As String = If(question.QType, String.Empty).ToLowerInvariant()
+        Dim preferredWidth = ComputeInputWidth()
+
+        Select Case typ
+            Case "text", "string"
+                Dim tb As New TextBox()
+                tb.Width = preferredWidth
+                tb.MinimumSize = New Size(preferredWidth, tb.Height)
+                tb.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+                tb.ForeColor = baseTextColor
+                tb.BackColor = Color.White
+                tb.BorderStyle = BorderStyle.FixedSingle
+                tb.Margin = inputMargin
+                AddHandler tb.LostFocus, Sub(s, ev) answers(question.QKey) = tb.Text
+                Return WrapInput(tb)
+
+            Case "number"
+                Dim tbn As New TextBox()
+                tbn.Width = Math.Max(200, preferredWidth \ 2)
+                tbn.MinimumSize = New Size(Math.Max(200, preferredWidth \ 2), tbn.Height)
+                tbn.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+                tbn.ForeColor = baseTextColor
+                tbn.BackColor = Color.White
+                tbn.BorderStyle = BorderStyle.FixedSingle
+                tbn.Margin = inputMargin
+                AddHandler tbn.LostFocus, Sub(s, ev)
+                                              Dim d As Double
+                                              If Double.TryParse(tbn.Text, d) Then
+                                                  answers(question.QKey) = d
+                                              Else
+                                                  answers(question.QKey) = 0.0
+                                              End If
+                                          End Sub
+                Return WrapInput(tbn)
+
+            Case "kvlist"
+                Dim cols As Integer = 3
+                Dim tlp As New TableLayoutPanel()
+                tlp.AutoSize = True
+                tlp.ColumnCount = cols
+                tlp.RowCount = CInt(Math.Ceiling(LANGUAGE_LIST.Length / CDbl(cols)))
+                tlp.Padding = New Padding(0)
+                tlp.Margin = inputMargin
+                tlp.GrowStyle = TableLayoutPanelGrowStyle.AddRows
+                tlp.Tag = $"kvlist|{question.QKey}"
+                tlp.MaximumSize = New Size(preferredWidth, 0)
+
+                For i As Integer = 0 To cols - 1
+                    tlp.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, CSng(100.0 / cols)))
+                Next
+
+                Dim idx As Integer = 0
+                For Each lang In LANGUAGE_LIST
+                    Dim r = idx \ cols
+                    Dim c = idx Mod cols
+
+                    Dim itemPanel As New Panel()
+                    itemPanel.AutoSize = True
+                    itemPanel.Padding = New Padding(2)
+
+                    Dim l As New Label()
+                    l.Text = lang
+                    l.ForeColor = baseTextColor
+                    l.AutoSize = True
+                    l.Top = 2
+                    l.Left = 2
+                    itemPanel.Controls.Add(l)
+
+                    Dim nud As New NumericUpDown()
+                    nud.Minimum = CDec(0)
+                    nud.Maximum = CDec(5)
+                    nud.DecimalPlaces = 1
+                    nud.Increment = CDec(0.1)
+                    nud.Value = CDec(0)
+                    nud.Width = 90
+                    nud.Top = l.Bottom + 6
+                    nud.Left = 2
+                    nud.ForeColor = baseTextColor
+                    nud.BackColor = Color.White
+                    nud.Tag = lang
+
+                    AddHandler nud.ValueChanged, AddressOf LanguageNumeric_ValueChanged
+                    AddHandler nud.GotFocus, AddressOf LanguageNumeric_GotFocus
+                    AddHandler nud.LostFocus, AddressOf LanguageNumeric_LostFocus
+
+                    itemPanel.Controls.Add(nud)
+
+                    Dim placeholder As New Panel()
+                    placeholder.AutoSize = True
+                    placeholder.Controls.Add(itemPanel)
+
+                    While tlp.RowCount <= r
+                        tlp.RowCount += 1
+                        tlp.RowStyles.Add(New RowStyle(SizeType.AutoSize))
+                    End While
+
+                    tlp.Controls.Add(placeholder, c, r)
+                    idx += 1
+                Next
+
+                UpdateKvlistAnswers(tlp, question.QKey)
+                Return WrapInput(tlp)
+
+            Case "select"
+                Dim separators = New String() {",", "|", ";", Environment.NewLine}
+                Dim rawOptions = If(question.Options, String.Empty)
+                Dim optionList = rawOptions.Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                Dim cleaned = optionList.Select(Function(opt) opt.Trim()).Where(Function(opt) Not String.IsNullOrWhiteSpace(opt)).ToList()
+                If cleaned.Count = 0 Then Exit Select
+                Dim radioGroup = BuildRadioOptionGroup(question.QKey, cleaned, baseTextColor, primaryColor, inputMargin, preferredWidth)
+                Return radioGroup
+
+            Case "yesno"
+                Dim yesNoList = YESNO_OPTIONS.Select(Function(opt) opt).ToList()
+                Dim yesNoGroup = BuildRadioOptionGroup(question.QKey, yesNoList, baseTextColor, primaryColor, inputMargin, Math.Max(260, preferredWidth \ 2))
+                Return yesNoGroup
+
+            Case Else
+                Dim tbf As New TextBox()
+                tbf.Width = preferredWidth
+                tbf.MinimumSize = New Size(preferredWidth, tbf.Height)
+                tbf.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+                tbf.ForeColor = baseTextColor
+                tbf.BackColor = Color.White
+                tbf.BorderStyle = BorderStyle.FixedSingle
+                tbf.Margin = inputMargin
+                AddHandler tbf.LostFocus, Sub(s, ev) answers(question.QKey) = tbf.Text
+                Return WrapInput(tbf)
+        End Select
+
+        Dim fallback As New TextBox()
+        fallback.Width = preferredWidth
+        fallback.MinimumSize = New Size(preferredWidth, fallback.Height)
+        fallback.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+        fallback.ForeColor = baseTextColor
+        fallback.BackColor = Color.White
+        fallback.BorderStyle = BorderStyle.FixedSingle
+        fallback.Margin = inputMargin
+        AddHandler fallback.LostFocus, Sub(s, ev) answers(question.QKey) = fallback.Text
+        Return WrapInput(fallback)
+    End Function
+
+    Private Function WrapInput(control As Control) As Control
+        If TypeOf control Is TableLayoutPanel Then
+            control.Margin = New Padding(0)
+            Return control
+        End If
+
+        Dim wrapper As New Panel()
+        wrapper.AutoSize = True
+        wrapper.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        wrapper.Padding = New Padding(0)
+        wrapper.Margin = New Padding(0)
+        wrapper.Controls.Add(control)
+        Return wrapper
+    End Function
+
+    Private Function BuildRadioOptionGroup(qKey As String, options As IEnumerable(Of String), baseTextColor As Color, primaryColor As Color, inputMargin As Padding, preferredWidth As Integer) As Control
+        Dim optionItems = options?.Where(Function(opt) Not String.IsNullOrWhiteSpace(opt)).Select(Function(opt) opt.Trim()).ToList()
+        Dim group As New FlowLayoutPanel()
+        group.AutoSize = True
+        group.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        group.FlowDirection = FlowDirection.LeftToRight
+        group.WrapContents = True
+        group.Padding = New Padding(0)
+        group.Margin = inputMargin
+        group.MaximumSize = New Size(preferredWidth, 0)
+
+        Dim existingValue As String = Nothing
+        If answers.ContainsKey(qKey) Then
+            existingValue = Convert.ToString(answers(qKey))
+        End If
+
+        If optionItems Is Nothing OrElse optionItems.Count = 0 Then
+            Return group
+        End If
+
+        For Each opt In optionItems
+            Dim radio As New RadioButton()
+            radio.Appearance = Appearance.Button
+            radio.AutoSize = True
+            radio.Text = opt
+            radio.Cursor = Cursors.Hand
+            radio.FlatStyle = FlatStyle.Flat
+            radio.FlatAppearance.BorderSize = 1
+            radio.Margin = New Padding(0, 0, 10, 10)
+            radio.Padding = New Padding(14, 8, 14, 8)
+            radio.TextAlign = ContentAlignment.MiddleCenter
+            radio.Checked = String.Equals(existingValue, opt, StringComparison.OrdinalIgnoreCase)
+            UpdateRadioVisualState(radio, radio.Checked, primaryColor, baseTextColor)
+            AddHandler radio.CheckedChanged,
+                Sub(sender, args)
+                    Dim rb = DirectCast(sender, RadioButton)
+                    UpdateRadioVisualState(rb, rb.Checked, primaryColor, baseTextColor)
+                    If rb.Checked Then
+                        answers(qKey) = rb.Text
+                    End If
+                End Sub
+            group.Controls.Add(radio)
+        Next
+
+        Return group
+    End Function
+
+    Private Sub UpdateRadioVisualState(radio As RadioButton, isChecked As Boolean, primaryColor As Color, baseTextColor As Color)
+        Dim borderColor = Color.FromArgb(209, 213, 219)
+        radio.BackColor = If(isChecked, Color.FromArgb(229, 244, 255), Color.White)
+        radio.FlatAppearance.BorderColor = If(isChecked, primaryColor, borderColor)
+        radio.ForeColor = If(isChecked, primaryColor, baseTextColor)
+    End Sub
+
     Private Sub LanguageNumeric_ValueChanged(sender As Object, e As EventArgs)
         Dim nud = TryCast(sender, NumericUpDown)
         If nud Is Nothing Then Return
@@ -384,23 +581,63 @@ Public Class Question_Form
     End Sub
 
     Private Sub UpdateAllKvlistAnswers()
-        For Each c As Control In FlowLayoutPanelQuestions.Controls
-            If TypeOf c Is TableLayoutPanel Then
-
-                Dim idx = FlowLayoutPanelQuestions.Controls.GetChildIndex(c)
-                If idx > 0 Then
-                    Dim prev = FlowLayoutPanelQuestions.Controls(idx - 1)
-                    Dim qKey As String = Nothing
-                    If TypeOf prev Is Label Then
-
-                    End If
-                End If
-
-                UpdateKvlistAnswers(DirectCast(c, TableLayoutPanel), "skills")
-                UpdateKvlistAnswers(DirectCast(c, TableLayoutPanel), "interests")
-            End If
+        Dim questionsPanel = ResolveQuestionsPanel()
+        If questionsPanel Is Nothing Then Return
+        For Each tlp As TableLayoutPanel In EnumerateDescendants(Of TableLayoutPanel)(questionsPanel)
+            Dim tagValue = Convert.ToString(tlp.Tag)
+            If String.IsNullOrWhiteSpace(tagValue) OrElse Not tagValue.StartsWith("kvlist|") Then Continue For
+            Dim qKey = tagValue.Substring(7)
+            UpdateKvlistAnswers(tlp, qKey)
         Next
     End Sub
+
+    Private Iterator Function EnumerateDescendants(Of T As Control)(parent As Control) As IEnumerable(Of T)
+        If parent Is Nothing Then Return
+        For Each child As Control In parent.Controls
+            If TypeOf child Is T Then
+                Yield DirectCast(child, T)
+            End If
+            For Each nested In EnumerateDescendants(Of T)(child)
+                Yield nested
+            Next
+        Next
+    End Function
+
+    Private Function ComputeInputWidth() As Integer
+        Dim questionsPanel = ResolveQuestionsPanel()
+        If questionsPanel Is Nothing Then Return 420
+        Dim width = questionsPanel.ClientSize.Width - questionsPanel.Padding.Horizontal - 60
+        Return Math.Max(width, 220)
+    End Function
+
+    Private Sub Card_Paint(sender As Object, e As PaintEventArgs)
+        Dim card = TryCast(sender, Panel)
+        If card Is Nothing Then Return
+        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias
+        Dim rect = card.ClientRectangle
+        If rect.Width <= 0 OrElse rect.Height <= 0 Then Return
+        rect.Inflate(-1, -1)
+        Using path = BuildRoundedPath(rect, 16)
+            Using fillBrush As New LinearGradientBrush(rect, Color.FromArgb(255, 255, 255), Color.FromArgb(245, 248, 255), LinearGradientMode.Vertical)
+                e.Graphics.FillPath(fillBrush, path)
+            End Using
+
+            Using borderPen As New Pen(Color.FromArgb(215, 219, 230))
+                e.Graphics.DrawPath(borderPen, path)
+            End Using
+        End Using
+    End Sub
+
+    Private Function BuildRoundedPath(rect As Rectangle, radius As Integer) As GraphicsPath
+        Dim path As New GraphicsPath()
+        Dim diameter = radius * 2
+        path.AddArc(rect.X, rect.Y, diameter, diameter, 180, 90)
+        path.AddArc(rect.Right - diameter, rect.Y, diameter, diameter, 270, 90)
+        path.AddArc(rect.Right - diameter, rect.Bottom - diameter, diameter, diameter, 0, 90)
+        path.AddArc(rect.X, rect.Bottom - diameter, diameter, diameter, 90, 90)
+        path.CloseFigure()
+        Return path
+    End Function
 
     Private Function FindParentOfType(child As Control, t As Type) As Control
         Dim p = child.Parent
@@ -451,4 +688,7 @@ Public Class Question_Form
         Me.Close()
     End Sub
 
+    Private Sub PictureLogo_Click(sender As Object, e As EventArgs) Handles PictureLogo.Click
+
+    End Sub
 End Class

@@ -105,7 +105,7 @@ Partial Class Login
         ' 
         LabelUsername.AutoSize = True
         LabelUsername.Font = New Font("Segoe UI", 9F)
-        LabelUsername.ForeColor = Color.LightGray
+        LabelUsername.ForeColor = Color.DimGray
         LabelUsername.Location = New Point(40, 127)
         LabelUsername.Name = "LabelUsername"
         LabelUsername.Size = New Size(60, 15)
@@ -127,7 +127,7 @@ Partial Class Login
         ' 
         LabelPassword.AutoSize = True
         LabelPassword.Font = New Font("Segoe UI", 9F)
-        LabelPassword.ForeColor = Color.LightGray
+        LabelPassword.ForeColor = Color.DimGray
         LabelPassword.Location = New Point(40, 209)
         LabelPassword.Name = "LabelPassword"
         LabelPassword.Size = New Size(57, 15)
