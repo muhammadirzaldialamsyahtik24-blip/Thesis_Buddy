@@ -160,16 +160,21 @@ Public Class Register
     End Sub
 
     Private Sub CheckBoxShow_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxShow.CheckedChanged
+        
         If TextBoxPassword.ForeColor = Color.Gray Then
-            ' placeholder visible, ignore
-            Return
-        End If
-        If CheckBoxShow.Checked Then
             TextBoxPassword.PasswordChar = ControlChars.NullChar
+        ElseIf CheckBoxShow.Checked Then
+            TextBoxPassword.PasswordChar = ControlChars.NullChar
+        Else
+            TextBoxPassword.PasswordChar = "●"c
+        End If
+
+        If TextBoxConfirm.ForeColor = Color.Gray Then
+            TextBoxConfirm.PasswordChar = ControlChars.NullChar
+        ElseIf CheckBoxShow.Checked Then
             TextBoxConfirm.PasswordChar = ControlChars.NullChar
         Else
-            TextBoxPassword.PasswordChar = "?"c
-            TextBoxConfirm.PasswordChar = "?"c
+            TextBoxConfirm.PasswordChar = "●"c
         End If
     End Sub
 
