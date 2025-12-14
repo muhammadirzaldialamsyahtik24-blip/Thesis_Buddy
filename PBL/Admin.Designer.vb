@@ -24,6 +24,9 @@ Partial Class Admin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         TableLayoutPanelMain = New TableLayoutPanel()
         PanelHeader = New Panel()
         LabelSubtitle = New Label()
@@ -66,7 +69,7 @@ Partial Class Admin
         ' 
         ' TableLayoutPanelMain
         ' 
-        TableLayoutPanelMain.BackColor = Color.FromArgb(9, 12, 23)
+        TableLayoutPanelMain.BackColor = Color.FromArgb(13, 17, 33)
         TableLayoutPanelMain.ColumnCount = 1
         TableLayoutPanelMain.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 100F))
         TableLayoutPanelMain.Controls.Add(PanelHeader, 0, 0)
@@ -75,33 +78,33 @@ Partial Class Admin
         TableLayoutPanelMain.Controls.Add(GridQuestions, 0, 3)
         TableLayoutPanelMain.Controls.Add(TableLayoutPanelFooter, 0, 4)
         TableLayoutPanelMain.Dock = DockStyle.Fill
-        TableLayoutPanelMain.Padding = New Padding(24, 24, 24, 16)
+        TableLayoutPanelMain.Padding = New Padding(32, 32, 32, 24)
         TableLayoutPanelMain.RowCount = 5
         TableLayoutPanelMain.RowStyles.Add(New RowStyle())
         TableLayoutPanelMain.RowStyles.Add(New RowStyle())
         TableLayoutPanelMain.RowStyles.Add(New RowStyle())
         TableLayoutPanelMain.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
         TableLayoutPanelMain.RowStyles.Add(New RowStyle())
-        TableLayoutPanelMain.Size = New Size(1200, 780)
+        TableLayoutPanelMain.Size = New Size(1200, 800)
         TableLayoutPanelMain.TabIndex = 0
         ' 
         ' PanelHeader
         ' 
-        PanelHeader.BackColor = Color.FromArgb(15, 23, 42)
+        PanelHeader.BackColor = Color.FromArgb(26, 34, 54)
         PanelHeader.Controls.Add(LabelSubtitle)
         PanelHeader.Controls.Add(LabelTitle)
         PanelHeader.Dock = DockStyle.Fill
         PanelHeader.Margin = New Padding(0, 0, 0, 16)
-        PanelHeader.Padding = New Padding(24)
-        PanelHeader.Size = New Size(1152, 94)
+        PanelHeader.Padding = New Padding(32, 28, 32, 28)
+        PanelHeader.Size = New Size(1136, 108)
         PanelHeader.TabIndex = 0
         ' 
         ' LabelSubtitle
         ' 
         LabelSubtitle.AutoSize = True
-        LabelSubtitle.Font = New Font("Segoe UI", 10.0F)
-        LabelSubtitle.ForeColor = Color.FromArgb(148, 163, 184)
-        LabelSubtitle.Location = New Point(24, 54)
+        LabelSubtitle.Font = New Font("Segoe UI", 11.5F, FontStyle.Italic)
+        LabelSubtitle.ForeColor = Color.FromArgb(203, 213, 225)
+        LabelSubtitle.Location = New Point(32, 64)
         LabelSubtitle.Name = "LabelSubtitle"
         LabelSubtitle.Size = New Size(415, 19)
         LabelSubtitle.TabIndex = 1
@@ -110,9 +113,9 @@ Partial Class Admin
         ' LabelTitle
         ' 
         LabelTitle.AutoSize = True
-        LabelTitle.Font = New Font("Segoe UI", 22.0F, FontStyle.Bold)
-        LabelTitle.ForeColor = Color.FromArgb(96, 165, 250)
-        LabelTitle.Location = New Point(20, 10)
+        LabelTitle.Font = New Font("Segoe UI", 28.0F, FontStyle.Bold)
+        LabelTitle.ForeColor = Color.FromArgb(59, 130, 246)
+        LabelTitle.Location = New Point(28, 16)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(281, 41)
         LabelTitle.TabIndex = 0
@@ -127,29 +130,29 @@ Partial Class Admin
         FlowSummary.Controls.Add(PanelStatSynced)
         FlowSummary.Dock = DockStyle.Fill
         FlowSummary.FlowDirection = FlowDirection.LeftToRight
-        FlowSummary.Location = New Point(24, 134)
-        FlowSummary.Margin = New Padding(0, 0, 0, 16)
+        FlowSummary.Location = New Point(32, 140)
+        FlowSummary.Margin = New Padding(0, 0, 0, 18)
         FlowSummary.Name = "FlowSummary"
-        FlowSummary.Size = New Size(1152, 104)
+        FlowSummary.Size = New Size(1136, 112)
         FlowSummary.TabIndex = 1
         FlowSummary.WrapContents = False
         ' 
         ' PanelStatQuestions
         ' 
-        PanelStatQuestions.BackColor = Color.FromArgb(15, 23, 42)
+        PanelStatQuestions.BackColor = Color.FromArgb(37, 49, 72)
         PanelStatQuestions.Controls.Add(LabelStatQuestionsValue)
         PanelStatQuestions.Controls.Add(LabelStatQuestionsTitle)
-        PanelStatQuestions.Margin = New Padding(0, 0, 16, 0)
-        PanelStatQuestions.Padding = New Padding(20)
-        PanelStatQuestions.Size = New Size(260, 104)
+        PanelStatQuestions.Margin = New Padding(0, 0, 18, 0)
+        PanelStatQuestions.Padding = New Padding(22, 20, 22, 20)
+        PanelStatQuestions.Size = New Size(270, 112)
         PanelStatQuestions.TabIndex = 0
         ' 
         ' LabelStatQuestionsValue
         ' 
         LabelStatQuestionsValue.AutoSize = True
-        LabelStatQuestionsValue.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold)
-        LabelStatQuestionsValue.ForeColor = Color.White
-        LabelStatQuestionsValue.Location = New Point(18, 44)
+        LabelStatQuestionsValue.Font = New Font("Segoe UI", 23.0F, FontStyle.Bold)
+        LabelStatQuestionsValue.ForeColor = Color.FromArgb(96, 165, 250)
+        LabelStatQuestionsValue.Location = New Point(20, 46)
         LabelStatQuestionsValue.Name = "LabelStatQuestionsValue"
         LabelStatQuestionsValue.Size = New Size(46, 37)
         LabelStatQuestionsValue.TabIndex = 1
@@ -158,9 +161,9 @@ Partial Class Admin
         ' LabelStatQuestionsTitle
         ' 
         LabelStatQuestionsTitle.AutoSize = True
-        LabelStatQuestionsTitle.Font = New Font("Segoe UI", 10.0F)
-        LabelStatQuestionsTitle.ForeColor = Color.FromArgb(148, 163, 184)
-        LabelStatQuestionsTitle.Location = New Point(20, 12)
+        LabelStatQuestionsTitle.Font = New Font("Segoe UI", 11.0F, FontStyle.Italic)
+        LabelStatQuestionsTitle.ForeColor = Color.FromArgb(203, 213, 225)
+        LabelStatQuestionsTitle.Location = New Point(22, 14)
         LabelStatQuestionsTitle.Name = "LabelStatQuestionsTitle"
         LabelStatQuestionsTitle.Size = New Size(128, 19)
         LabelStatQuestionsTitle.TabIndex = 0
@@ -168,20 +171,20 @@ Partial Class Admin
         ' 
         ' PanelStatActive
         ' 
-        PanelStatActive.BackColor = Color.FromArgb(15, 23, 42)
+        PanelStatActive.BackColor = Color.FromArgb(37, 49, 72)
         PanelStatActive.Controls.Add(LabelStatActiveValue)
         PanelStatActive.Controls.Add(LabelStatActiveTitle)
-        PanelStatActive.Margin = New Padding(0, 0, 16, 0)
-        PanelStatActive.Padding = New Padding(20)
-        PanelStatActive.Size = New Size(260, 104)
+        PanelStatActive.Margin = New Padding(0, 0, 18, 0)
+        PanelStatActive.Padding = New Padding(22, 20, 22, 20)
+        PanelStatActive.Size = New Size(270, 112)
         PanelStatActive.TabIndex = 1
         ' 
         ' LabelStatActiveValue
         ' 
         LabelStatActiveValue.AutoSize = True
-        LabelStatActiveValue.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold)
-        LabelStatActiveValue.ForeColor = Color.White
-        LabelStatActiveValue.Location = New Point(18, 44)
+        LabelStatActiveValue.Font = New Font("Segoe UI", 23.0F, FontStyle.Bold)
+        LabelStatActiveValue.ForeColor = Color.FromArgb(96, 165, 250)
+        LabelStatActiveValue.Location = New Point(20, 46)
         LabelStatActiveValue.Name = "LabelStatActiveValue"
         LabelStatActiveValue.Size = New Size(46, 37)
         LabelStatActiveValue.TabIndex = 1
@@ -190,9 +193,9 @@ Partial Class Admin
         ' LabelStatActiveTitle
         ' 
         LabelStatActiveTitle.AutoSize = True
-        LabelStatActiveTitle.Font = New Font("Segoe UI", 10.0F)
-        LabelStatActiveTitle.ForeColor = Color.FromArgb(148, 163, 184)
-        LabelStatActiveTitle.Location = New Point(20, 12)
+        LabelStatActiveTitle.Font = New Font("Segoe UI", 11.0F, FontStyle.Italic)
+        LabelStatActiveTitle.ForeColor = Color.FromArgb(203, 213, 225)
+        LabelStatActiveTitle.Location = New Point(22, 14)
         LabelStatActiveTitle.Name = "LabelStatActiveTitle"
         LabelStatActiveTitle.Size = New Size(129, 19)
         LabelStatActiveTitle.TabIndex = 0
@@ -200,20 +203,20 @@ Partial Class Admin
         ' 
         ' PanelStatSynced
         ' 
-        PanelStatSynced.BackColor = Color.FromArgb(15, 23, 42)
+        PanelStatSynced.BackColor = Color.FromArgb(37, 49, 72)
         PanelStatSynced.Controls.Add(LabelStatSyncedValue)
         PanelStatSynced.Controls.Add(LabelStatSyncedTitle)
         PanelStatSynced.Margin = New Padding(0)
-        PanelStatSynced.Padding = New Padding(20)
-        PanelStatSynced.Size = New Size(400, 104)
+        PanelStatSynced.Padding = New Padding(22, 20, 22, 20)
+        PanelStatSynced.Size = New Size(356, 112)
         PanelStatSynced.TabIndex = 2
         ' 
         ' LabelStatSyncedValue
         ' 
         LabelStatSyncedValue.AutoSize = True
-        LabelStatSyncedValue.Font = New Font("Segoe UI", 20.0F, FontStyle.Bold)
-        LabelStatSyncedValue.ForeColor = Color.White
-        LabelStatSyncedValue.Location = New Point(18, 44)
+        LabelStatSyncedValue.Font = New Font("Segoe UI", 23.0F, FontStyle.Bold)
+        LabelStatSyncedValue.ForeColor = Color.FromArgb(96, 165, 250)
+        LabelStatSyncedValue.Location = New Point(20, 46)
         LabelStatSyncedValue.Name = "LabelStatSyncedValue"
         LabelStatSyncedValue.Size = New Size(46, 37)
         LabelStatSyncedValue.TabIndex = 1
@@ -222,9 +225,9 @@ Partial Class Admin
         ' LabelStatSyncedTitle
         ' 
         LabelStatSyncedTitle.AutoSize = True
-        LabelStatSyncedTitle.Font = New Font("Segoe UI", 10.0F)
-        LabelStatSyncedTitle.ForeColor = Color.FromArgb(148, 163, 184)
-        LabelStatSyncedTitle.Location = New Point(20, 12)
+        LabelStatSyncedTitle.Font = New Font("Segoe UI", 11.0F, FontStyle.Italic)
+        LabelStatSyncedTitle.ForeColor = Color.FromArgb(203, 213, 225)
+        LabelStatSyncedTitle.Location = New Point(22, 14)
         LabelStatSyncedTitle.Name = "LabelStatSyncedTitle"
         LabelStatSyncedTitle.Size = New Size(158, 19)
         LabelStatSyncedTitle.TabIndex = 0
@@ -243,98 +246,130 @@ Partial Class Admin
         ButtonHistory.FlatAppearance.BorderSize = 0
         ButtonHistory.FlatStyle = FlatStyle.Flat
         ButtonHistory.ForeColor = Color.White
-        ButtonHistory.Location = New Point(716, 0)
+        ButtonHistory.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonHistory.Location = New Point(736, 0)
         ButtonHistory.Margin = New Padding(12, 0, 0, 0)
         ButtonHistory.Name = "ButtonHistory"
         ButtonHistory.Size = New Size(120, 32)
         ButtonHistory.TabIndex = 4
         ButtonHistory.Text = "Cek History"
         ButtonHistory.UseVisualStyleBackColor = False
+        ButtonHistory.Cursor = Cursors.Hand
         PanelFilters.Controls.Add(ButtonHistory)
         PanelFilters.Dock = DockStyle.Fill
-        PanelFilters.Location = New Point(24, 254)
+        PanelFilters.Location = New Point(32, 270)
         PanelFilters.Margin = New Padding(0, 0, 0, 12)
         PanelFilters.Name = "PanelFilters"
-        PanelFilters.Size = New Size(1152, 42)
+        PanelFilters.Size = New Size(1136, 44)
         PanelFilters.TabIndex = 2
         PanelFilters.WrapContents = False
         ' 
         ' TextBoxSearch
         ' 
-        TextBoxSearch.BackColor = Color.FromArgb(15, 23, 42)
+        TextBoxSearch.BackColor = Color.FromArgb(30, 41, 59)
         TextBoxSearch.BorderStyle = BorderStyle.FixedSingle
-        TextBoxSearch.Font = New Font("Segoe UI", 10.0F)
+        TextBoxSearch.Font = New Font("Segoe UI", 11.0F)
         TextBoxSearch.ForeColor = Color.White
         TextBoxSearch.Location = New Point(0, 0)
         TextBoxSearch.Margin = New Padding(0, 0, 12, 0)
         TextBoxSearch.Name = "TextBoxSearch"
         TextBoxSearch.PlaceholderText = "Cari qkey, prompt, atau kategori..."
-        TextBoxSearch.Size = New Size(320, 25)
+        TextBoxSearch.Size = New Size(340, 27)
         TextBoxSearch.TabIndex = 0
         ' 
         ' ButtonClearSearch
         ' 
-        ButtonClearSearch.BackColor = Color.FromArgb(30, 41, 59)
+        ButtonClearSearch.BackColor = Color.FromArgb(45, 55, 72)
         ButtonClearSearch.FlatAppearance.BorderSize = 0
         ButtonClearSearch.FlatStyle = FlatStyle.Flat
         ButtonClearSearch.ForeColor = Color.FromArgb(226, 232, 240)
-        ButtonClearSearch.Location = New Point(332, 0)
+        ButtonClearSearch.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonClearSearch.Location = New Point(352, 0)
         ButtonClearSearch.Margin = New Padding(0, 0, 12, 0)
         ButtonClearSearch.Name = "ButtonClearSearch"
         ButtonClearSearch.Size = New Size(90, 32)
         ButtonClearSearch.TabIndex = 1
         ButtonClearSearch.Text = "Bersihkan"
         ButtonClearSearch.UseVisualStyleBackColor = False
+        ButtonClearSearch.Cursor = Cursors.Hand
         ' 
         ' ButtonRefresh
         ' 
-        ButtonRefresh.BackColor = Color.FromArgb(51, 65, 85)
+        ButtonRefresh.BackColor = Color.FromArgb(59, 72, 99)
         ButtonRefresh.FlatAppearance.BorderSize = 0
         ButtonRefresh.FlatStyle = FlatStyle.Flat
         ButtonRefresh.ForeColor = Color.FromArgb(226, 232, 240)
-        ButtonRefresh.Location = New Point(434, 0)
+        ButtonRefresh.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonRefresh.Location = New Point(454, 0)
         ButtonRefresh.Margin = New Padding(0, 0, 12, 0)
         ButtonRefresh.Name = "ButtonRefresh"
         ButtonRefresh.Size = New Size(110, 32)
         ButtonRefresh.TabIndex = 2
         ButtonRefresh.Text = "Refresh"
         ButtonRefresh.UseVisualStyleBackColor = False
+        ButtonRefresh.Cursor = Cursors.Hand
         ' 
         ' ButtonSeed
         ' 
-        ButtonSeed.BackColor = Color.FromArgb(59, 130, 246)
+        ButtonSeed.BackColor = Color.FromArgb(37, 161, 142)
         ButtonSeed.FlatAppearance.BorderSize = 0
         ButtonSeed.FlatStyle = FlatStyle.Flat
         ButtonSeed.ForeColor = Color.White
-        ButtonSeed.Location = New Point(556, 0)
+        ButtonSeed.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonSeed.Location = New Point(576, 0)
         ButtonSeed.Margin = New Padding(0)
         ButtonSeed.Name = "ButtonSeed"
         ButtonSeed.Size = New Size(150, 32)
         ButtonSeed.TabIndex = 3
         ButtonSeed.Text = "Seed Question Bank"
         ButtonSeed.UseVisualStyleBackColor = False
+        ButtonSeed.Cursor = Cursors.Hand
         ' 
         ' GridQuestions
         ' 
         GridQuestions.AllowUserToAddRows = False
         GridQuestions.AllowUserToDeleteRows = False
         GridQuestions.AllowUserToResizeRows = False
-        GridQuestions.BackgroundColor = Color.FromArgb(15, 23, 42)
+        GridQuestions.BackgroundColor = Color.FromArgb(24, 32, 52)
         GridQuestions.BorderStyle = BorderStyle.None
-        GridQuestions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        GridQuestions.ColumnHeadersHeight = 40
+        GridQuestions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         GridQuestions.Dock = DockStyle.Fill
         GridQuestions.EnableHeadersVisualStyles = False
-        GridQuestions.GridColor = Color.FromArgb(30, 41, 59)
-        GridQuestions.Location = New Point(24, 308)
-        GridQuestions.Margin = New Padding(0, 0, 0, 12)
+        GridQuestions.GridColor = Color.FromArgb(59, 130, 246)
+        GridQuestions.Location = New Point(32, 326)
+        GridQuestions.Margin = New Padding(0, 0, 0, 16)
         GridQuestions.MultiSelect = False
         GridQuestions.Name = "GridQuestions"
         GridQuestions.ReadOnly = True
         GridQuestions.RowHeadersVisible = False
-        GridQuestions.RowTemplate.Height = 32
+        GridQuestions.RowTemplate.Height = 36
         GridQuestions.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        GridQuestions.Size = New Size(1152, 408)
+        GridQuestions.Size = New Size(1136, 408)
         GridQuestions.TabIndex = 3
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = Color.FromArgb(26, 34, 54)
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        DataGridViewCellStyle1.ForeColor = Color.FromArgb(226, 232, 240)
+        DataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(79, 70, 229)
+        DataGridViewCellStyle1.SelectionForeColor = Color.White
+        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
+        GridQuestions.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = Color.FromArgb(30, 41, 59)
+        DataGridViewCellStyle2.Font = New Font("Segoe UI", 10.0F)
+        DataGridViewCellStyle2.ForeColor = Color.FromArgb(226, 232, 240)
+        DataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(79, 70, 229)
+        DataGridViewCellStyle2.SelectionForeColor = Color.White
+        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
+        GridQuestions.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.BackColor = Color.FromArgb(24, 32, 52)
+        DataGridViewCellStyle3.Font = New Font("Segoe UI", 10.0F)
+        DataGridViewCellStyle3.ForeColor = Color.FromArgb(148, 163, 184)
+        DataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(79, 70, 229)
+        DataGridViewCellStyle3.SelectionForeColor = Color.White
+        GridQuestions.RowsDefaultCellStyle = DataGridViewCellStyle3
+        GridQuestions.RowTemplate.DefaultCellStyle.Padding = New Padding(6, 0, 6, 0)
         ' 
         ' TableLayoutPanelFooter
         ' 
@@ -344,20 +379,20 @@ Partial Class Admin
         TableLayoutPanelFooter.Controls.Add(LabelStatus, 0, 0)
         TableLayoutPanelFooter.Controls.Add(FlowActions, 1, 0)
         TableLayoutPanelFooter.Dock = DockStyle.Fill
-        TableLayoutPanelFooter.Location = New Point(24, 728)
+        TableLayoutPanelFooter.Location = New Point(32, 748)
         TableLayoutPanelFooter.Margin = New Padding(0)
         TableLayoutPanelFooter.Name = "TableLayoutPanelFooter"
         TableLayoutPanelFooter.RowCount = 1
         TableLayoutPanelFooter.RowStyles.Add(New RowStyle())
-        TableLayoutPanelFooter.Size = New Size(1152, 36)
+        TableLayoutPanelFooter.Size = New Size(1136, 36)
         TableLayoutPanelFooter.TabIndex = 4
         ' 
         ' LabelStatus
         ' 
         LabelStatus.AutoSize = True
         LabelStatus.Dock = DockStyle.Fill
-        LabelStatus.Font = New Font("Segoe UI", 9.5F)
-        LabelStatus.ForeColor = Color.FromArgb(148, 163, 184)
+        LabelStatus.Font = New Font("Segoe UI", 10.0F, FontStyle.Italic)
+        LabelStatus.ForeColor = Color.FromArgb(203, 213, 225)
         LabelStatus.Location = New Point(0, 0)
         LabelStatus.Margin = New Padding(0)
         LabelStatus.Name = "LabelStatus"
@@ -376,7 +411,7 @@ Partial Class Admin
         FlowActions.Controls.Add(ButtonClose)
         FlowActions.Dock = DockStyle.Right
         FlowActions.FlowDirection = FlowDirection.RightToLeft
-        FlowActions.Location = New Point(708, 0)
+        FlowActions.Location = New Point(704, 0)
         FlowActions.Margin = New Padding(0)
         FlowActions.Name = "FlowActions"
         FlowActions.Size = New Size(444, 36)
@@ -388,13 +423,15 @@ Partial Class Admin
         ButtonAdd.FlatAppearance.BorderSize = 0
         ButtonAdd.FlatStyle = FlatStyle.Flat
         ButtonAdd.ForeColor = Color.White
-        ButtonAdd.Location = New Point(354, 0)
+        ButtonAdd.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonAdd.Location = New Point(350, 0)
         ButtonAdd.Margin = New Padding(0, 0, 12, 0)
         ButtonAdd.Name = "ButtonAdd"
         ButtonAdd.Size = New Size(90, 32)
         ButtonAdd.TabIndex = 0
         ButtonAdd.Text = "Tambah"
         ButtonAdd.UseVisualStyleBackColor = False
+        ButtonAdd.Cursor = Cursors.Hand
         ' 
         ' ButtonEdit
         ' 
@@ -402,27 +439,31 @@ Partial Class Admin
         ButtonEdit.FlatAppearance.BorderSize = 0
         ButtonEdit.FlatStyle = FlatStyle.Flat
         ButtonEdit.ForeColor = Color.White
-        ButtonEdit.Location = New Point(252, 0)
+        ButtonEdit.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonEdit.Location = New Point(248, 0)
         ButtonEdit.Margin = New Padding(0, 0, 12, 0)
         ButtonEdit.Name = "ButtonEdit"
         ButtonEdit.Size = New Size(90, 32)
         ButtonEdit.TabIndex = 1
         ButtonEdit.Text = "Edit"
         ButtonEdit.UseVisualStyleBackColor = False
+        ButtonEdit.Cursor = Cursors.Hand
         ' 
         ' ButtonToggleActive
         ' 
-        ButtonToggleActive.BackColor = Color.FromArgb(30, 41, 59)
+        ButtonToggleActive.BackColor = Color.FromArgb(45, 55, 72)
         ButtonToggleActive.FlatAppearance.BorderSize = 0
         ButtonToggleActive.FlatStyle = FlatStyle.Flat
         ButtonToggleActive.ForeColor = Color.FromArgb(226, 232, 240)
-        ButtonToggleActive.Location = New Point(110, 0)
+        ButtonToggleActive.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        ButtonToggleActive.Location = New Point(106, 0)
         ButtonToggleActive.Margin = New Padding(0, 0, 12, 0)
         ButtonToggleActive.Name = "ButtonToggleActive"
         ButtonToggleActive.Size = New Size(130, 32)
         ButtonToggleActive.TabIndex = 2
         ButtonToggleActive.Text = "Aktifkan/Nonaktif"
         ButtonToggleActive.UseVisualStyleBackColor = False
+        ButtonToggleActive.Cursor = Cursors.Hand
         ' 
         ' ButtonClose
         ' 
@@ -430,6 +471,7 @@ Partial Class Admin
         ButtonClose.FlatAppearance.BorderSize = 0
         ButtonClose.FlatStyle = FlatStyle.Flat
         ButtonClose.ForeColor = Color.White
+        ButtonClose.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
         ButtonClose.Location = New Point(0, 0)
         ButtonClose.Margin = New Padding(0)
         ButtonClose.Name = "ButtonClose"
@@ -437,13 +479,14 @@ Partial Class Admin
         ButtonClose.TabIndex = 3
         ButtonClose.Text = "Tutup"
         ButtonClose.UseVisualStyleBackColor = False
+        ButtonClose.Cursor = Cursors.Hand
         ' 
         ' Admin
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(9, 12, 23)
-        ClientSize = New Size(1200, 780)
+        BackColor = Color.FromArgb(13, 17, 33)
+        ClientSize = New Size(1200, 800)
         Controls.Add(TableLayoutPanelMain)
         Font = New Font("Segoe UI", 10.0F)
         ForeColor = Color.White

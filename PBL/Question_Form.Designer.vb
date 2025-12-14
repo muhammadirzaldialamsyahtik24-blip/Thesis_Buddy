@@ -22,6 +22,7 @@ Partial Class Question_Form
     ' Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        PanelLogoContainer = New Panel()
         PictureLogo = New PictureBox()
         PanelCard = New Panel()
         PanelQuestionsHost = New Panel()
@@ -33,78 +34,92 @@ Partial Class Question_Form
         PanelNav = New FlowLayoutPanel()
         ButtonSubmit = New Button()
         ButtonCancel = New Button()
+        PanelLogoContainer.SuspendLayout()
         CType(PictureLogo, ComponentModel.ISupportInitialize).BeginInit()
         PanelCard.SuspendLayout()
         PanelQuestionsHost.SuspendLayout()
         PanelScrollTrack.SuspendLayout()
         SuspendLayout()
         ' 
+        ' PanelLogoContainer
+        ' 
+        PanelLogoContainer.BackColor = Color.White
+        PanelLogoContainer.Controls.Add(PictureLogo)
+        PanelLogoContainer.Location = New Point(40, 24)
+        PanelLogoContainer.Name = "PanelLogoContainer"
+        PanelLogoContainer.Padding = New Padding(16)
+        PanelLogoContainer.Size = New Size(112, 112)
+        PanelLogoContainer.TabIndex = 1
+        ' 
         ' PictureLogo
         ' 
         PictureLogo.BackColor = Color.Transparent
+        PictureLogo.Dock = DockStyle.Fill
         PictureLogo.Image = My.Resources.Resources.thesisbuddy_logo
-        PictureLogo.Location = New Point(24, 24)
         PictureLogo.Name = "PictureLogo"
         PictureLogo.Size = New Size(80, 80)
         PictureLogo.SizeMode = PictureBoxSizeMode.Zoom
-        PictureLogo.TabIndex = 1
+        PictureLogo.TabIndex = 0
         PictureLogo.TabStop = False
         ' 
         ' PanelCard
         ' 
         PanelCard.Dock = DockStyle.Fill
-        PanelCard.BackColor = Color.FromArgb(CByte(17), CByte(24), CByte(39))
+        PanelCard.BackColor = Color.White
         PanelCard.Controls.Add(PanelQuestionsHost)
-        PanelCard.Controls.Add(PictureLogo)
         PanelCard.Controls.Add(LabelTitle)
         PanelCard.Controls.Add(LabelSubtitle)
-        PanelCard.Controls.Add(PanelNav)
         PanelCard.Controls.Add(ButtonSubmit)
         PanelCard.Controls.Add(ButtonCancel)
+        PanelCard.Controls.Add(PanelNav)
+        PanelCard.Controls.Add(PanelLogoContainer)
         PanelCard.Location = New Point(0, 0)
         PanelCard.Name = "PanelCard"
+        PanelCard.Padding = New Padding(40, 32, 40, 32)
         PanelCard.Size = New Size(967, 640)
         PanelCard.TabIndex = 2
         ' 
         ' PanelQuestionsHost
         ' 
         PanelQuestionsHost.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        PanelQuestionsHost.BackColor = Color.FromArgb(CByte(28), CByte(38), CByte(57))
+        PanelQuestionsHost.BackColor = Color.FromArgb(CByte(248), CByte(250), CByte(252))
         PanelQuestionsHost.Controls.Add(FlowLayoutPanelQuestions)
         PanelQuestionsHost.Controls.Add(PanelScrollTrack)
-        PanelQuestionsHost.Location = New Point(40, 130)
+        PanelQuestionsHost.Location = New Point(56, 156)
         PanelQuestionsHost.Name = "PanelQuestionsHost"
         PanelQuestionsHost.Padding = New Padding(0)
-        PanelQuestionsHost.Size = New Size(887, 440)
+        PanelQuestionsHost.Margin = New Padding(0, 0, 0, 16)
+        PanelQuestionsHost.Size = New Size(855, 380)
         PanelQuestionsHost.TabIndex = 8
         ' 
         ' PanelScrollTrack
         ' 
-        PanelScrollTrack.BackColor = Color.FromArgb(CByte(15), CByte(23), CByte(42))
+        PanelScrollTrack.BackColor = Color.FromArgb(CByte(226), CByte(232), CByte(240))
         PanelScrollTrack.Controls.Add(PanelScrollThumb)
         PanelScrollTrack.Dock = DockStyle.Right
-        PanelScrollTrack.Location = New Point(863, 0)
+        PanelScrollTrack.Location = New Point(835, 0)
         PanelScrollTrack.Name = "PanelScrollTrack"
-        PanelScrollTrack.Padding = New Padding(0, 12, 0, 12)
-        PanelScrollTrack.Size = New Size(24, 440)
+        PanelScrollTrack.Padding = New Padding(3, 20, 3, 20)
+        PanelScrollTrack.Size = New Size(20, 408)
+        PanelScrollTrack.Visible = False
         PanelScrollTrack.TabIndex = 1
         ' 
         ' PanelScrollThumb
         ' 
-        PanelScrollThumb.BackColor = Color.FromArgb(CByte(96), CByte(165), CByte(250))
+        PanelScrollThumb.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
         PanelScrollThumb.BorderStyle = BorderStyle.None
         PanelScrollThumb.Cursor = Cursors.Hand
-        PanelScrollThumb.Location = New Point(4, 12)
+        PanelScrollThumb.Location = New Point(4, 20)
         PanelScrollThumb.Name = "PanelScrollThumb"
-        PanelScrollThumb.Size = New Size(16, 80)
+        PanelScrollThumb.Size = New Size(12, 90)
         PanelScrollThumb.TabIndex = 0
         ' 
         ' LabelTitle
         ' 
         LabelTitle.AutoSize = True
-        LabelTitle.Font = New Font("Segoe UI", 22.0F, FontStyle.Bold)
-        LabelTitle.ForeColor = Color.FromArgb(CByte(96), CByte(165), CByte(250))
-        LabelTitle.Location = New Point(105, 31)
+        LabelTitle.Font = New Font("Segoe UI", 26.0F, FontStyle.Bold)
+        LabelTitle.ForeColor = Color.FromArgb(CByte(37), CByte(99), CByte(235))
+        LabelTitle.Location = New Point(156, 32)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(345, 41)
         LabelTitle.TabIndex = 3
@@ -114,11 +129,11 @@ Partial Class Question_Form
         ' 
         LabelSubtitle.AutoSize = True
         LabelSubtitle.BackColor = Color.Transparent
-        LabelSubtitle.Font = New Font("Segoe UI", 11.0F)
-        LabelSubtitle.ForeColor = Color.FromArgb(CByte(148), CByte(163), CByte(184))
-        LabelSubtitle.Location = New Point(105, 79)
+        LabelSubtitle.Font = New Font("Segoe UI", 12.0F)
+        LabelSubtitle.ForeColor = Color.FromArgb(CByte(100), CByte(116), CByte(139))
+        LabelSubtitle.Location = New Point(156, 86)
         LabelSubtitle.Name = "LabelSubtitle"
-        LabelSubtitle.Size = New Size(380, 20)
+        LabelSubtitle.Size = New Size(380, 21)
         LabelSubtitle.TabIndex = 4
         LabelSubtitle.Text = "Answer all questions to get your thesis recommendation"
         ' 
@@ -126,38 +141,40 @@ Partial Class Question_Form
         ' 
         FlowLayoutPanelQuestions.Dock = DockStyle.Fill
         FlowLayoutPanelQuestions.AutoScroll = True
-        FlowLayoutPanelQuestions.BackColor = Color.FromArgb(CByte(28), CByte(38), CByte(57))
+        FlowLayoutPanelQuestions.BackColor = Color.FromArgb(CByte(248), CByte(250), CByte(252))
         FlowLayoutPanelQuestions.FlowDirection = FlowDirection.TopDown
         FlowLayoutPanelQuestions.Name = "FlowLayoutPanelQuestions"
-        FlowLayoutPanelQuestions.Padding = New Padding(12)
-        FlowLayoutPanelQuestions.Size = New Size(863, 440)
+        FlowLayoutPanelQuestions.Padding = New Padding(24, 20, 12, 20)
+        FlowLayoutPanelQuestions.Size = New Size(835, 408)
         FlowLayoutPanelQuestions.TabIndex = 5
         FlowLayoutPanelQuestions.WrapContents = False
         ' 
         ' PanelNav
         ' 
-        PanelNav.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        PanelNav.BackColor = Color.Transparent
+        PanelNav.BackColor = Color.FromArgb(CByte(241), CByte(245), CByte(249))
+        PanelNav.Dock = DockStyle.Bottom
         PanelNav.FlowDirection = FlowDirection.LeftToRight
-        PanelNav.Location = New Point(40, 580)
+        PanelNav.Location = New Point(40, 552)
         PanelNav.Margin = New Padding(0)
         PanelNav.Name = "PanelNav"
-        PanelNav.Padding = New Padding(0)
-        PanelNav.Size = New Size(887, 50)
+        PanelNav.Padding = New Padding(16, 12, 16, 12)
+        PanelNav.Size = New Size(887, 88)
         PanelNav.TabIndex = 7
         PanelNav.WrapContents = False
         ' 
         ' ButtonSubmit
         ' 
-        ButtonSubmit.BackColor = Color.FromArgb(CByte(96), CByte(165), CByte(250))
+        ButtonSubmit.BackColor = Color.FromArgb(CByte(37), CByte(99), CByte(235))
         ButtonSubmit.Cursor = Cursors.Hand
         ButtonSubmit.FlatAppearance.BorderSize = 0
+        ButtonSubmit.FlatAppearance.MouseDownBackColor = Color.FromArgb(CByte(30), CByte(64), CByte(175))
+        ButtonSubmit.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(29), CByte(78), CByte(216))
         ButtonSubmit.FlatStyle = FlatStyle.Flat
-        ButtonSubmit.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
+        ButtonSubmit.Font = New Font("Segoe UI", 13.0F, FontStyle.Bold)
         ButtonSubmit.ForeColor = Color.White
-        ButtonSubmit.Location = New Point(595, 580)
+        ButtonSubmit.Location = New Point(600, 576)
         ButtonSubmit.Name = "ButtonSubmit"
-        ButtonSubmit.Size = New Size(190, 50)
+        ButtonSubmit.Size = New Size(196, 52)
         ButtonSubmit.TabIndex = 6
         ButtonSubmit.Text = "Submit Answers"
         ButtonSubmit.UseVisualStyleBackColor = False
@@ -165,16 +182,18 @@ Partial Class Question_Form
         ' 
         ' ButtonCancel
         ' 
-        ButtonCancel.BackColor = Color.FromArgb(CByte(15), CByte(23), CByte(42))
+        ButtonCancel.BackColor = Color.White
         ButtonCancel.Cursor = Cursors.Hand
-        ButtonCancel.FlatAppearance.BorderColor = Color.FromArgb(CByte(248), CByte(113), CByte(113))
+        ButtonCancel.FlatAppearance.BorderColor = Color.FromArgb(CByte(239), CByte(68), CByte(68))
         ButtonCancel.FlatAppearance.BorderSize = 2
+        ButtonCancel.FlatAppearance.MouseDownBackColor = Color.FromArgb(CByte(254), CByte(226), CByte(226))
+        ButtonCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(254), CByte(242), CByte(242))
         ButtonCancel.FlatStyle = FlatStyle.Flat
-        ButtonCancel.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
-        ButtonCancel.ForeColor = Color.FromArgb(CByte(248), CByte(113), CByte(113))
-        ButtonCancel.Location = New Point(40, 580)
+        ButtonCancel.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
+        ButtonCancel.ForeColor = Color.FromArgb(CByte(239), CByte(68), CByte(68))
+        ButtonCancel.Location = New Point(56, 576)
         ButtonCancel.Name = "ButtonCancel"
-        ButtonCancel.Size = New Size(190, 50)
+        ButtonCancel.Size = New Size(196, 52)
         ButtonCancel.TabIndex = 7
         ButtonCancel.Text = "Cancel"
         ButtonCancel.UseVisualStyleBackColor = False
@@ -184,8 +203,8 @@ Partial Class Question_Form
         ' 
         AutoScaleDimensions = New SizeF(7.0F, 17.0F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(CByte(9), CByte(12), CByte(23))
-        ClientSize = New Size(1280, 800)
+        BackColor = Color.FromArgb(CByte(229), CByte(231), CByte(235))
+        ClientSize = New Size(1280, 820)
         Controls.Add(PanelCard)
         Padding = New Padding(32, 24, 32, 24)
         Font = New Font("Segoe UI", 10.0F)
@@ -199,11 +218,13 @@ Partial Class Question_Form
         CType(PictureLogo, ComponentModel.ISupportInitialize).EndInit()
         PanelCard.ResumeLayout(False)
         PanelCard.PerformLayout()
+        PanelLogoContainer.ResumeLayout(False)
         PanelQuestionsHost.ResumeLayout(False)
         PanelScrollTrack.ResumeLayout(False)
         ResumeLayout(False)
 
     End Sub
+    Friend WithEvents PanelLogoContainer As Panel
     Friend WithEvents PictureLogo As PictureBox
     Friend WithEvents PanelCard As Panel
     Friend WithEvents PanelQuestionsHost As Panel

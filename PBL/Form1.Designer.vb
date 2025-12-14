@@ -38,9 +38,9 @@ Partial Class Form1
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 28.2F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
-        Label1.ForeColor = SystemColors.ActiveCaptionText
-        Label1.Location = New Point(119, 17)
+        Label1.Font = New Font("Segoe UI", 30.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = Color.FromArgb(59, 130, 246)
+        Label1.Location = New Point(120, 22)
         Label1.Name = "Label1"
         Label1.Size = New Size(809, 62)
         Label1.TabIndex = 3
@@ -49,8 +49,9 @@ Partial Class Form1
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(33, 14)
+        Label2.Font = New Font("Segoe UI", 10.5F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label2.ForeColor = Color.FromArgb(100, 116, 139)
+        Label2.Location = New Point(28, 16)
         Label2.Name = "Label2"
         Label2.Size = New Size(196, 25)
         Label2.TabIndex = 4
@@ -59,6 +60,7 @@ Partial Class Form1
         ' Panel1
         ' 
         Panel1.Controls.Add(Label2)
+        Panel1.BackColor = Color.FromArgb(248, 250, 252)
         Panel1.Location = New Point(1, 565)
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(1040, 57)
@@ -67,43 +69,62 @@ Partial Class Form1
         ' Panel3
         ' 
         Panel3.Controls.Add(Label1)
+        Panel3.BackColor = Color.FromArgb(248, 250, 252)
         Panel3.Location = New Point(1, 1)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1040, 110)
+        Panel3.Size = New Size(1040, 120)
         Panel3.TabIndex = 7
         ' 
         ' Button1
         ' 
+        Button1.BackColor = Color.FromArgb(59, 130, 246)
+        Button1.FlatAppearance.BorderSize = 0
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
+        Button1.ForeColor = Color.White
         Button1.Location = New Point(182, 297)
         Button1.Name = "Button1"
-        Button1.Size = New Size(179, 60)
+        Button1.Size = New Size(200, 62)
         Button1.TabIndex = 0
-        Button1.Text = "Mulai Konsultasi ->"
-        Button1.UseVisualStyleBackColor = True
+        Button1.Text = "Mulai Konsultasi →"
+        Button1.UseVisualStyleBackColor = False
         ' 
         ' Button3
         ' 
+        Button3.BackColor = Color.White
+        Button3.FlatAppearance.BorderColor = Color.FromArgb(239, 68, 68)
+        Button3.FlatAppearance.BorderSize = 2
+        Button3.FlatStyle = FlatStyle.Flat
+        Button3.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
+        Button3.ForeColor = Color.FromArgb(239, 68, 68)
         Button3.Location = New Point(741, 297)
         Button3.Name = "Button3"
-        Button3.Size = New Size(179, 60)
+        Button3.Size = New Size(200, 62)
         Button3.TabIndex = 2
-        Button3.Text = "Exit"
+        Button3.Text = "Keluar"
         Button3.UseVisualStyleBackColor = True
         ' 
         ' Button2
         ' 
+        Button2.BackColor = Color.White
+        Button2.FlatAppearance.BorderColor = Color.FromArgb(59, 130, 246)
+        Button2.FlatAppearance.BorderSize = 2
+        Button2.FlatStyle = FlatStyle.Flat
+        Button2.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
+        Button2.ForeColor = Color.FromArgb(59, 130, 246)
         Button2.Location = New Point(443, 297)
         Button2.Name = "Button2"
-        Button2.Size = New Size(179, 60)
+        Button2.Size = New Size(200, 62)
         Button2.TabIndex = 1
-        Button2.Text = "About Sistem"
+        Button2.Text = "Tentang Sistem"
         Button2.UseVisualStyleBackColor = True
         ' 
         ' PictureBox1
         ' 
-        PictureBox1.Location = New Point(12, 117)
+        PictureBox1.Location = New Point(24, 140)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(164, 100)
+        PictureBox1.Size = New Size(200, 120)
+        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
         PictureBox1.TabIndex = 8
         PictureBox1.TabStop = False
         ' 
@@ -111,8 +132,8 @@ Partial Class Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.Cornsilk
-        ClientSize = New Size(1041, 622)
+        BackColor = Color.FromArgb(226, 232, 240)
+        ClientSize = New Size(1060, 640)
         Controls.Add(PictureBox1)
         Controls.Add(Button3)
         Controls.Add(Button2)

@@ -43,7 +43,7 @@ Partial Class Login
         ' 
         ' PanelLeft
         ' 
-        PanelLeft.BackColor = Color.FromArgb(CByte(26), CByte(32), CByte(44))
+        PanelLeft.BackColor = Color.FromArgb(CByte(15), CByte(23), CByte(42))
         PanelLeft.Controls.Add(PictureLogo)
         PanelLeft.Dock = DockStyle.Left
         PanelLeft.Location = New Point(0, 0)
@@ -63,7 +63,7 @@ Partial Class Login
         ' 
         ' PanelCard
         ' 
-        PanelCard.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(255))
+        PanelCard.BackColor = Color.FromArgb(CByte(248), CByte(250), CByte(252))
         PanelCard.Controls.Add(LabelTitle)
         PanelCard.Controls.Add(LabelSubtitle)
         PanelCard.Controls.Add(LabelUsername)
@@ -74,17 +74,19 @@ Partial Class Login
         PanelCard.Controls.Add(LinkForgot)
         PanelCard.Controls.Add(ButtonRegister)
         PanelCard.Controls.Add(ButtonLogin)
-        PanelCard.Location = New Point(440, 100)
+        PanelCard.Location = New Point(440, 90)
+        PanelCard.Padding = New Padding(32, 36, 32, 32)
+        PanelCard.BorderStyle = BorderStyle.FixedSingle
         PanelCard.Name = "PanelCard"
-        PanelCard.Size = New Size(480, 400)
+        PanelCard.Size = New Size(490, 420)
         PanelCard.TabIndex = 2
         ' 
         ' LabelTitle
         ' 
         LabelTitle.AutoSize = True
-        LabelTitle.Font = New Font("Segoe UI", 24F, FontStyle.Bold)
+        LabelTitle.Font = New Font("Segoe UI", 26F, FontStyle.Bold)
         LabelTitle.ForeColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
-        LabelTitle.Location = New Point(40, 35)
+        LabelTitle.Location = New Point(34, 30)
         LabelTitle.Name = "LabelTitle"
         LabelTitle.Size = New Size(248, 45)
         LabelTitle.TabIndex = 3
@@ -93,9 +95,9 @@ Partial Class Login
         ' LabelSubtitle
         ' 
         LabelSubtitle.AutoSize = True
-        LabelSubtitle.Font = New Font("Segoe UI", 11F)
-        LabelSubtitle.ForeColor = Color.FromArgb(CByte(107), CByte(114), CByte(128))
-        LabelSubtitle.Location = New Point(40, 85)
+        LabelSubtitle.Font = New Font("Segoe UI", 12F)
+        LabelSubtitle.ForeColor = Color.FromArgb(CByte(100), CByte(116), CByte(139))
+        LabelSubtitle.Location = New Point(36, 86)
         LabelSubtitle.Name = "LabelSubtitle"
         LabelSubtitle.Size = New Size(237, 20)
         LabelSubtitle.TabIndex = 4
@@ -106,7 +108,7 @@ Partial Class Login
         LabelUsername.AutoSize = True
         LabelUsername.Font = New Font("Segoe UI", 9F)
         LabelUsername.ForeColor = Color.DimGray
-        LabelUsername.Location = New Point(40, 127)
+        LabelUsername.Location = New Point(40, 134)
         LabelUsername.Name = "LabelUsername"
         LabelUsername.Size = New Size(60, 15)
         LabelUsername.TabIndex = 5
@@ -114,13 +116,14 @@ Partial Class Login
         ' 
         ' TextBoxUsername
         ' 
-        TextBoxUsername.BackColor = Color.FromArgb(CByte(248), CByte(250), CByte(252))
+        TextBoxUsername.BackColor = Color.White
         TextBoxUsername.BorderStyle = BorderStyle.FixedSingle
-        TextBoxUsername.Font = New Font("Segoe UI", 11F)
+        TextBoxUsername.Font = New Font("Segoe UI", 11.5F)
         TextBoxUsername.ForeColor = Color.FromArgb(CByte(31), CByte(41), CByte(55))
-        TextBoxUsername.Location = New Point(40, 155)
+        TextBoxUsername.Location = New Point(40, 162)
         TextBoxUsername.Name = "TextBoxUsername"
-        TextBoxUsername.Size = New Size(400, 27)
+        TextBoxUsername.PlaceholderText = "Masukkan username"
+        TextBoxUsername.Size = New Size(400, 28)
         TextBoxUsername.TabIndex = 6
         ' 
         ' LabelPassword
@@ -128,7 +131,7 @@ Partial Class Login
         LabelPassword.AutoSize = True
         LabelPassword.Font = New Font("Segoe UI", 9F)
         LabelPassword.ForeColor = Color.DimGray
-        LabelPassword.Location = New Point(40, 209)
+        LabelPassword.Location = New Point(40, 220)
         LabelPassword.Name = "LabelPassword"
         LabelPassword.Size = New Size(57, 15)
         LabelPassword.TabIndex = 7
@@ -136,21 +139,22 @@ Partial Class Login
         ' 
         ' TextBoxPassword
         ' 
-        TextBoxPassword.BackColor = Color.FromArgb(CByte(248), CByte(250), CByte(252))
+        TextBoxPassword.BackColor = Color.White
         TextBoxPassword.BorderStyle = BorderStyle.FixedSingle
-        TextBoxPassword.Font = New Font("Segoe UI", 11F)
+        TextBoxPassword.Font = New Font("Segoe UI", 11.5F)
         TextBoxPassword.ForeColor = Color.FromArgb(CByte(31), CByte(41), CByte(55))
-        TextBoxPassword.Location = New Point(40, 230)
+        TextBoxPassword.Location = New Point(40, 242)
         TextBoxPassword.Name = "TextBoxPassword"
         TextBoxPassword.PasswordChar = "●"c
-        TextBoxPassword.Size = New Size(400, 27)
+        TextBoxPassword.PlaceholderText = "Masukkan password"
+        TextBoxPassword.Size = New Size(400, 28)
         TextBoxPassword.TabIndex = 8
         ' 
         ' CheckBoxShow
         ' 
         CheckBoxShow.AutoSize = True
         CheckBoxShow.ForeColor = Color.LightGray
-        CheckBoxShow.Location = New Point(425, 210)
+        CheckBoxShow.Location = New Point(425, 226)
         CheckBoxShow.Name = "CheckBoxShow"
         CheckBoxShow.Size = New Size(15, 14)
         CheckBoxShow.TabIndex = 9
@@ -158,10 +162,10 @@ Partial Class Login
         ' 
         ' LinkForgot
         ' 
-        LinkForgot.ActiveLinkColor = Color.FromArgb(CByte(255), CByte(128), CByte(128))
+        LinkForgot.ActiveLinkColor = Color.FromArgb(CByte(96), CByte(165), CByte(250))
         LinkForgot.AutoSize = True
-        LinkForgot.LinkColor = Color.Maroon
-        LinkForgot.Location = New Point(36, 260)
+        LinkForgot.LinkColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        LinkForgot.Location = New Point(36, 280)
         LinkForgot.Name = "LinkForgot"
         LinkForgot.Size = New Size(118, 19)
         LinkForgot.TabIndex = 10
@@ -175,11 +179,11 @@ Partial Class Login
         ButtonRegister.FlatAppearance.BorderColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
         ButtonRegister.FlatAppearance.BorderSize = 2
         ButtonRegister.FlatStyle = FlatStyle.Flat
-        ButtonRegister.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        ButtonRegister.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
         ButtonRegister.ForeColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
-        ButtonRegister.Location = New Point(40, 310)
+        ButtonRegister.Location = New Point(40, 332)
         ButtonRegister.Name = "ButtonRegister"
-        ButtonRegister.Size = New Size(220, 48)
+        ButtonRegister.Size = New Size(220, 52)
         ButtonRegister.TabIndex = 11
         ButtonRegister.Text = "Create Account"
         ButtonRegister.UseVisualStyleBackColor = False
@@ -190,11 +194,11 @@ Partial Class Login
         ButtonLogin.Cursor = Cursors.Hand
         ButtonLogin.FlatAppearance.BorderSize = 0
         ButtonLogin.FlatStyle = FlatStyle.Flat
-        ButtonLogin.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
+        ButtonLogin.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
         ButtonLogin.ForeColor = Color.White
-        ButtonLogin.Location = New Point(270, 310)
+        ButtonLogin.Location = New Point(270, 332)
         ButtonLogin.Name = "ButtonLogin"
-        ButtonLogin.Size = New Size(170, 48)
+        ButtonLogin.Size = New Size(170, 52)
         ButtonLogin.TabIndex = 12
         ButtonLogin.Text = "Sign In"
         ButtonLogin.UseVisualStyleBackColor = False
@@ -203,8 +207,8 @@ Partial Class Login
         ' 
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(CByte(243), CByte(244), CByte(246))
-        ClientSize = New Size(1000, 600)
+        BackColor = Color.FromArgb(CByte(226), CByte(232), CByte(240))
+        ClientSize = New Size(1020, 610)
         Controls.Add(PanelCard)
         Controls.Add(PanelLeft)
         Font = New Font("Segoe UI", 10F)

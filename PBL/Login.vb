@@ -142,9 +142,11 @@ Public Class Login
                 Dim role = DatabaseHelper.GetUserRole(username)
                 If String.Equals(role, "admin", StringComparison.OrdinalIgnoreCase) Then
                     Dim adminForm As New Admin()
+                    AddHandler adminForm.FormClosed, Sub() Me.Close()
                     adminForm.Show()
                 Else
                     Dim mainForm As New Main_Menu()
+                    AddHandler mainForm.FormClosed, Sub() Me.Close()
                     mainForm.Show()
                 End If
                 Me.Hide()

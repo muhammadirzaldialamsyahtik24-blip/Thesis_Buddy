@@ -51,10 +51,12 @@ Public Class Main_Menu
     End Sub
 
     Private Sub ButtonStart_Click(sender As Object, e As EventArgs) Handles ButtonStart.Click
-        ' Open question form (assumes Question_Form exists)
-        Dim qf As New Question_Form()
-        qf.Show()
         Me.Hide()
+        Using qf As New Question_Form()
+            qf.ShowDialog(Me)
+        End Using
+        Me.Show()
+        Me.Activate()
     End Sub
 
     Private Sub ButtonAbout_Click(sender As Object, e As EventArgs) Handles ButtonAbout.Click

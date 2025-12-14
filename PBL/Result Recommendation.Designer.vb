@@ -32,20 +32,20 @@ Partial Class Result_Recommendation
         ' 
         ' Panel1
         ' 
-        Panel1.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        Panel1.BackColor = Color.FromArgb(CByte(37), CByte(99), CByte(235))
         Panel1.Controls.Add(Label1)
         Panel1.Dock = DockStyle.Top
         Panel1.Location = New Point(0, 0)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(900, 100)
+        Panel1.Size = New Size(900, 110)
         Panel1.TabIndex = 0
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 24.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Segoe UI", 26.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.White
-        Label1.Location = New Point(40, 30)
+        Label1.Location = New Point(42, 32)
         Label1.Name = "Label1"
         Label1.Size = New Size(450, 45)
         Label1.TabIndex = 0
@@ -54,15 +54,15 @@ Partial Class Result_Recommendation
         ' TextBox1
         ' 
         TextBox1.BackColor = Color.FromArgb(CByte(248), CByte(250), CByte(252))
-        TextBox1.BorderStyle = BorderStyle.FixedSingle
-        TextBox1.Font = New Font("Segoe UI", 11.0F)
+        TextBox1.BorderStyle = BorderStyle.None
+        TextBox1.Font = New Font("Segoe UI", 12.0F)
         TextBox1.ForeColor = Color.FromArgb(CByte(31), CByte(41), CByte(55))
-        TextBox1.Location = New Point(50, 150)
+        TextBox1.Location = New Point(52, 150)
         TextBox1.Multiline = True
         TextBox1.Name = "TextBox1"
         TextBox1.ReadOnly = True
         TextBox1.ScrollBars = ScrollBars.Vertical
-        TextBox1.Size = New Size(800, 320)
+        TextBox1.Size = New Size(796, 330)
         TextBox1.TabIndex = 1
         TextBox1.Text = "Loading results..."
         ' 
@@ -72,11 +72,11 @@ Partial Class Result_Recommendation
         Button1.FlatAppearance.BorderColor = Color.FromArgb(CByte(107), CByte(114), CByte(128))
         Button1.FlatAppearance.BorderSize = 2
         Button1.FlatStyle = FlatStyle.Flat
-        Button1.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
+        Button1.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
         Button1.ForeColor = Color.FromArgb(CByte(107), CByte(114), CByte(128))
-        Button1.Location = New Point(50, 500)
+        Button1.Location = New Point(50, 508)
         Button1.Name = "Button1"
-        Button1.Size = New Size(180, 55)
+        Button1.Size = New Size(190, 56)
         Button1.TabIndex = 2
         Button1.Text = "← Back"
         Button1.UseVisualStyleBackColor = False
@@ -84,14 +84,14 @@ Partial Class Result_Recommendation
         ' 
         ' Button2
         ' 
-        Button2.BackColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        Button2.BackColor = Color.FromArgb(CByte(37), CByte(161), CByte(142))
         Button2.FlatAppearance.BorderSize = 0
         Button2.FlatStyle = FlatStyle.Flat
-        Button2.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold)
+        Button2.Font = New Font("Segoe UI", 12.5F, FontStyle.Bold)
         Button2.ForeColor = Color.White
-        Button2.Location = New Point(670, 500)
+        Button2.Location = New Point(658, 508)
         Button2.Name = "Button2"
-        Button2.Size = New Size(180, 55)
+        Button2.Size = New Size(190, 56)
         Button2.TabIndex = 3
         Button2.Text = "💾 Save Result"
         Button2.UseVisualStyleBackColor = False
@@ -101,8 +101,8 @@ Partial Class Result_Recommendation
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.FromArgb(CByte(243), CByte(244), CByte(246))
-        ClientSize = New Size(900, 600)
+        BackColor = Color.FromArgb(CByte(226), CByte(232), CByte(240))
+        ClientSize = New Size(900, 620)
         Controls.Add(Button2)
         Controls.Add(Button1)
         Controls.Add(TextBox1)
