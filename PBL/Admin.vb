@@ -2,6 +2,86 @@
 Imports System.Linq
 
 Public Class Admin
+    Private showingHistory As Boolean = False
+    Private consults As List(Of ConsultationRow) = New List(Of ConsultationRow)()
+    Private Sub ButtonHistory_Click(sender As Object, e As EventArgs) Handles ButtonHistory.Click
+        If showingHistory Then
+            ShowQuestionsTable()
+        Else
+            ShowHistoryTable()
+        End If
+    End Sub
+
+    Private Sub ShowHistoryTable()
+        consults = DatabaseHelper.GetAllConsultations()
+        showingHistory = True
+        ConfigureHistoryGrid()
+        Dim rows = consults.Select(Function(c) New ConsultationGridRow(c)).ToList()
+        gridBinding.DataSource = rows
+        LabelStatus.Text = $"{rows.Count} konsultasi ditampilkan"
+        ButtonHistory.Text = "Lihat Pertanyaan"
+    End Sub
+
+    Private Sub ShowQuestionsTable()
+        showingHistory = False
+        ConfigureGrid()
+        ApplyFilter()
+        ButtonHistory.Text = "Cek History"
+    End Sub
+
+    Private Sub ConfigureHistoryGrid()
+        GridQuestions.AutoGenerateColumns = False
+        GridQuestions.Columns.Clear()
+        GridQuestions.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(30, 41, 59)
+        GridQuestions.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        GridQuestions.ColumnHeadersDefaultCellStyle.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold)
+        GridQuestions.DefaultCellStyle.BackColor = Color.FromArgb(15, 23, 42)
+        GridQuestions.DefaultCellStyle.ForeColor = Color.FromArgb(226, 232, 240)
+        GridQuestions.DefaultCellStyle.SelectionBackColor = Color.FromArgb(59, 130, 246)
+        GridQuestions.DefaultCellStyle.SelectionForeColor = Color.White
+        GridQuestions.DefaultCellStyle.Font = New Font("Segoe UI", 10.0F)
+
+        GridQuestions.Columns.Add(New DataGridViewTextBoxColumn With {
+            .DataPropertyName = "Id",
+            .HeaderText = "ID",
+            .Width = 60
+        })
+        GridQuestions.Columns.Add(New DataGridViewTextBoxColumn With {
+            .DataPropertyName = "Username",
+            .HeaderText = "Username",
+            .Width = 120
+        })
+        GridQuestions.Columns.Add(New DataGridViewTextBoxColumn With {
+            .DataPropertyName = "TimestampStr",
+            .HeaderText = "Waktu Konsultasi",
+            .Width = 160
+        })
+        GridQuestions.Columns.Add(New DataGridViewTextBoxColumn With {
+            .DataPropertyName = "Answers",
+            .HeaderText = "Jawaban",
+            .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        })
+        GridQuestions.Columns.Add(New DataGridViewTextBoxColumn With {
+            .DataPropertyName = "Recommendations",
+            .HeaderText = "Rekomendasi",
+            .Width = 200
+        })
+    End Sub
+
+    Private Class ConsultationGridRow
+        Public Sub New(model As ConsultationRow)
+            Id = model.Id
+            Username = model.Username
+            TimestampStr = model.Timestamp.ToString("dd MMM yyyy HH:mm")
+            Answers = model.Answers
+            Recommendations = model.Recommendations
+        End Sub
+        Public Property Id As Integer
+        Public Property Username As String
+        Public Property TimestampStr As String
+        Public Property Answers As String
+        Public Property Recommendations As String
+    End Class
     Private questions As List(Of QuestionModel) = New List(Of QuestionModel)()
     Private ReadOnly gridBinding As New BindingSource()
     Private lastSync As DateTime?
@@ -157,7 +237,11 @@ Public Class Admin
     End Sub
 
     Private Sub ButtonClose_Click(sender As Object, e As EventArgs) Handles ButtonClose.Click
-        Close()
+        Application.Exit()
+    End Sub
+
+    Private Sub Admin_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Application.Exit()
     End Sub
 
     Private Sub ButtonAdd_Click(sender As Object, e As EventArgs) Handles ButtonAdd.Click

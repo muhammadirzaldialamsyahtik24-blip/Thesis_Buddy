@@ -17,6 +17,8 @@ Partial Class Admin
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
+    Friend WithEvents ButtonHistory As Button
+
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
@@ -41,6 +43,7 @@ Partial Class Admin
         ButtonClearSearch = New Button()
         ButtonRefresh = New Button()
         ButtonSeed = New Button()
+        ButtonHistory = New Button()
         GridQuestions = New DataGridView()
         TableLayoutPanelFooter = New TableLayoutPanel()
         LabelStatus = New Label()
@@ -202,7 +205,7 @@ Partial Class Admin
         PanelStatSynced.Controls.Add(LabelStatSyncedTitle)
         PanelStatSynced.Margin = New Padding(0)
         PanelStatSynced.Padding = New Padding(20)
-        PanelStatSynced.Size = New Size(260, 104)
+        PanelStatSynced.Size = New Size(400, 104)
         PanelStatSynced.TabIndex = 2
         ' 
         ' LabelStatSyncedValue
@@ -235,6 +238,19 @@ Partial Class Admin
         PanelFilters.Controls.Add(ButtonClearSearch)
         PanelFilters.Controls.Add(ButtonRefresh)
         PanelFilters.Controls.Add(ButtonSeed)
+        ButtonHistory = New Button()
+        ButtonHistory.BackColor = Color.FromArgb(59, 130, 246)
+        ButtonHistory.FlatAppearance.BorderSize = 0
+        ButtonHistory.FlatStyle = FlatStyle.Flat
+        ButtonHistory.ForeColor = Color.White
+        ButtonHistory.Location = New Point(716, 0)
+        ButtonHistory.Margin = New Padding(12, 0, 0, 0)
+        ButtonHistory.Name = "ButtonHistory"
+        ButtonHistory.Size = New Size(120, 32)
+        ButtonHistory.TabIndex = 4
+        ButtonHistory.Text = "Cek History"
+        ButtonHistory.UseVisualStyleBackColor = False
+        PanelFilters.Controls.Add(ButtonHistory)
         PanelFilters.Dock = DockStyle.Fill
         PanelFilters.Location = New Point(24, 254)
         PanelFilters.Margin = New Padding(0, 0, 0, 12)

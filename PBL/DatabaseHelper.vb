@@ -4,6 +4,8 @@ Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
 
+
+
 Public Module DatabaseHelper
 
     Private connectionString As String = "server=localhost;userid=root;password=;database=thesis_buddy;"
@@ -11,6 +13,40 @@ Public Module DatabaseHelper
     Public Function GetConnection() As MySqlConnection
         Return New MySqlConnection(connectionString)
     End Function
+
+    Public Function GetAllConsultations() As List(Of ConsultationRow)
+        Dim list As New List(Of ConsultationRow)()
+        Try
+            Using conn As MySqlConnection = GetConnection()
+                conn.Open()
+                Dim sql As String = "SELECT id, username, timestamp, answers, recommendations FROM consultations ORDER BY timestamp DESC"
+                Using cmd As New MySqlCommand(sql, conn)
+                    Using rdr As MySqlDataReader = cmd.ExecuteReader()
+                        While rdr.Read()
+                            Dim row As New ConsultationRow()
+                            row.Id = Convert.ToInt32(rdr("id"))
+                            row.Username = Convert.ToString(rdr("username"))
+                            row.Timestamp = Convert.ToDateTime(rdr("timestamp"))
+                            row.Answers = Convert.ToString(rdr("answers"))
+                            row.Recommendations = Convert.ToString(rdr("recommendations"))
+                            list.Add(row)
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            ' ignore, return empty list
+        End Try
+        Return list
+    End Function
+
+    Public Class ConsultationRow
+        Public Property Id As Integer
+        Public Property Username As String
+        Public Property Timestamp As DateTime
+        Public Property Answers As String
+        Public Property Recommendations As String
+    End Class
 
     Public Function GetAllActiveQuestions() As List(Of QuestionModel)
         Dim list As New List(Of QuestionModel)()
