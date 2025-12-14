@@ -111,7 +111,7 @@ Public Class Register
         If tb.ForeColor = Color.Gray Then
             tb.Text = String.Empty
             tb.ForeColor = Color.Black
-            tb.PasswordChar = "?"c
+            tb.PasswordChar = "●"c
         End If
     End Sub
 
